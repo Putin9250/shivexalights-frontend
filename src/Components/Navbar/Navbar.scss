@@ -1,0 +1,451 @@
+// ===== VARIABLES =====
+$primary-color: #2879fe;
+$primary-hover: #1a5fd8;
+$text-color: #333;
+$border-color: #e5e5e5;
+
+// ===== NAVBAR BASE =====
+.navbar {
+  height: 70px;
+  background-color: white;
+  border-bottom: 1px solid $border-color;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      z-index: 101;
+
+      svg {
+        font-size: 28px;
+        color: $text-color;
+      }
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .link {
+        text-decoration: none;
+        color: $text-color;
+        font-weight: 500;
+        font-size: 16px;
+        transition: color 0.3s;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      width: 33.333%;
+
+      .indi {
+        height: 20px;
+        width: auto;
+      }
+    }
+
+    .center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      white-space: nowrap;
+      z-index: 1;
+
+      .link {
+        font-size: 28px;
+        font-weight: bold;
+        color: $primary-color;
+        text-decoration: none;
+
+        &:hover {
+          color: $primary-hover;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      justify-content: flex-end;
+      width: 33.333%;
+
+      .icons {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-left: 10px;
+
+        svg {
+          font-size: 22px;
+          color: #555;
+          cursor: pointer;
+          transition: color 0.3s;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+
+        .wishlistIcon {
+          position: relative;
+          cursor: pointer;
+
+          .dot {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+          }
+        }
+
+        .cartIcon {
+          position: relative;
+
+          span {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: $primary-color;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ===== MOBILE MENU STYLES =====
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 320px;
+  height: 100vh;
+  background-color: white;
+  z-index: 999;
+  transition: left 0.4s ease;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+  &.active {
+    left: 0;
+  }
+
+  .mobile-menu-header {
+    padding: 20px;
+    border-bottom: 1px solid $border-color;
+    background-color: #f8f9fa;
+
+    .mobile-menu-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      svg {
+        font-size: 24px;
+        color: $primary-color;
+      }
+
+      span {
+        font-weight: 600;
+        color: $text-color;
+      }
+    }
+  }
+
+  .mobile-menu-content {
+    padding: 20px 0;
+
+    .mobile-menu-section {
+      margin-bottom: 25px;
+      padding: 0 20px;
+
+      h3 {
+        font-size: 14px;
+        color: #666;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .mobile-menu-item {
+        margin-bottom: 10px;
+
+        a {
+          display: flex;
+          align-items: center;
+          padding: 12px 0;
+          text-decoration: none;
+          color: $text-color;
+          font-size: 16px;
+          font-weight: 500;
+          transition: color 0.3s;
+          border-bottom: 1px solid #f0f0f0;
+
+          &:hover {
+            color: $primary-color;
+          }
+
+          svg {
+            margin-right: 10px;
+            font-size: 20px;
+          }
+        }
+
+        .mobile-wishlist-trigger {
+          display: flex;
+          align-items: center;
+          padding: 12px 0;
+          color: $text-color;
+          font-size: 16px;
+          font-weight: 500;
+          transition: color 0.3s;
+          border-bottom: 1px solid #f0f0f0;
+          cursor: pointer;
+
+          &:hover {
+            color: $primary-color;
+          }
+
+          svg {
+            margin-right: 10px;
+            font-size: 20px;
+          }
+        }
+
+        .country-selector,
+        .currency-selector {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 0;
+
+          img {
+            height: 20px;
+            width: auto;
+          }
+
+          span {
+            flex: 1;
+            font-size: 16px;
+            color: $text-color;
+          }
+
+          svg {
+            color: #666;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ===== RESPONSIVE BREAKPOINTS =====
+
+// Medium Desktop / Large Tablet (max-width: 1456px)
+@media (max-width: 1456px) {
+  .navbar .wrapper {
+    max-width: 1200px; // Slightly narrower to prevent overflow
+
+    .left {
+      gap: 20px; // Reduce gap
+    }
+
+    .right {
+      gap: 20px;
+
+      .icons {
+        gap: 15px;
+      }
+    }
+  }
+}
+
+// Smaller Desktop (max-width: 1200px)
+@media (max-width: 1200px) {
+  .navbar .wrapper {
+    .left {
+      gap: 15px;
+      // Optionally hide one of the category links if needed
+      // .item:nth-child(5) { display: none; } // Hide Children if necessary
+    }
+
+    .right {
+      gap: 15px;
+
+      // Hide less important links to save space
+      .item:nth-child(3), // Contact
+      .item:nth-child(4)  // Store
+      {
+        display: none;
+      }
+
+      .icons {
+        gap: 12px;
+      }
+    }
+  }
+}
+
+// Tablet (max-width: 1024px)
+@media (max-width: 1024px) {
+  .navbar .wrapper {
+    .hamburger {
+      display: block;
+    }
+
+    .left {
+      .item:nth-child(1),
+      .item:nth-child(2),
+      .item:nth-child(3),.item:nth-child(4),.item:nth-child(5) {
+        display: none; // hide flag and currency
+      }
+      gap: 12px;
+      width: auto;
+    }
+
+    .center .link {
+      font-size: 24px;
+    }
+
+    .right {
+      width: auto;
+      .item {
+        display: none; // hide all nav links (Home, About, etc.)
+      }
+      .icons {
+        gap: 15px;
+      }
+    }
+  }
+}
+
+// Mobile (max-width: 768px)
+@media (max-width: 768px) {
+  .navbar {
+    height: 60px;
+
+    .wrapper {
+      padding: 0 15px;
+
+      .hamburger svg {
+        font-size: 24px;
+      }
+
+      .left {
+        display: none;
+      }
+
+      .center .link {
+        font-size: 20px;
+      }
+
+      .right .icons {
+        gap: 15px;
+
+        .cartIcon span {
+          width: 16px;
+          height: 16px;
+          font-size: 10px;
+        }
+
+        .wishlistIcon .dot {
+          width: 8px;
+          height: 8px;
+        }
+      }
+    }
+  }
+
+  .mobile-menu {
+    width: 280px;
+  }
+}
+
+// Small Mobile (max-width: 480px)
+@media (max-width: 480px) {
+  .navbar .wrapper {
+    padding: 0 10px;
+
+    .center .link {
+      font-size: 18px;
+    }
+
+    .right .icons {
+      gap: 12px;
+
+      .profile-icon {
+        display: none;
+      }
+
+      svg {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .mobile-menu {
+    width: 85%;
+    max-width: 300px;
+  }
+}
+
+// Desktop (min-width: 1025px)
+@media (min-width: 1025px) {
+  .mobile-menu-overlay,
+  .mobile-menu {
+    display: none;
+  }
+}

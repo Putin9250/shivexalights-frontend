@@ -1,0 +1,358 @@
+.categories {
+  display: flex;
+  height: 80vh;
+  gap: 10px;
+  margin: 50px;
+
+  .col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .col-l {
+    flex: 2;
+  }
+
+  .row {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+
+    button {
+      position: absolute;
+      min-width: 100px;
+      width: fit-content;
+      height: 50px;
+      padding: 10px;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      cursor: pointer;
+      border: none;
+      background-color: white;
+      text-transform: uppercase;
+      font-weight: 500;
+      z-index: 2;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #000;
+        color: white;
+      }
+
+      .link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  // Mobile layout (less than 768px)
+  @media (max-width = 768px) {
+    flex-direction: column;
+    height: auto; ///not happy here 
+    margin: 5px;
+    gap: 15px;
+
+    .col, .col-l {
+      flex: 1;
+      width: 100%;
+      flex-direction: column;
+    }
+
+    // Stack all rows vertically
+    .row {
+      flex: none;
+      min-height: 200px;
+      width: 100%;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+      // Remove nested flexbox structure for mobile
+      > .col {
+        display: block;
+        width: 100%;
+        
+        .row {
+          min-height: 180px;
+          margin-bottom: 10px;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      button {
+        min-width: 120px;
+        height: 45px;
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      img {
+        height: 100%;
+        min-height: 200px;
+      }
+    }
+
+    // Reset nested structures for mobile
+    .col-l > .row:first-child {
+      display: block !important; // Force single column
+      
+      > .col {
+        display: block;
+        width: 100%;
+        
+        .row {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    // Add counter for visual separation
+    $counter: 1;
+    @while $counter <= 6 {
+      .row:nth-of-type(#{$counter}) {
+        animation-delay: #{$counter * 0.1}s;
+      }
+      $counter: $counter + 1;
+    }
+  }
+
+  // Tablet layout (768px to 1023px)
+  @media (min-width: 769px) and (max-width: 1024px) {
+    height: 70vh;
+    gap: 8px;
+    margin: 8px;
+
+    .row {
+      button {
+        min-width: 90px;
+        height: 45px;
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  // Small mobile (less than 480px)
+  @media (max-width: 480px) {
+    gap: 10px;
+
+    .row {
+      min-height: 180px;
+      margin-bottom: 12px;
+
+      button {
+        min-width: 110px;
+        height: 40px;
+        padding: 6px 12px;
+        font-size: 13px;
+      }
+
+      img {
+        min-height: 180px;
+      }
+    }
+  }
+
+  // Very small screens (less than 360px)
+  @media (max-width: 360px) {
+    margin: 3px;
+    gap: 8px;
+
+    .row {
+      min-height: 160px;
+      margin-bottom: 10px;
+
+      button {
+        min-width: 100px;
+        height: 38px;
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+
+      img {
+        min-height: 160px;
+      }
+    }
+  }
+}
+
+// Add fade-in animation for mobile stacking
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .categories .row {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+  }
+}
+
+// Optional: Add a visual indicator for better mobile UX
+@media (max-width: 768px) {
+  .categories {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10px;
+      right: 10px;
+      height: 2px;
+      background: linear-gradient(90deg, #f0f0f0, #ddd, #f0f0f0);
+      z-index: 1;
+    }
+
+    .row {
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 10%;
+        right: 10%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #eee, transparent);
+      }
+
+      &:last-child::after {
+        display: none;
+      }
+    }
+  }
+}
+
+.categories-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+
+  .category-card {
+    position: relative;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+
+    button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 120px;
+      padding: 12px 24px;
+      background-color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 2;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #000;
+        color: white;
+      }
+
+      .link {
+        text-decoration: none;
+        color: inherit;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .category-card {
+      height: 180px;
+      
+      button {
+        min-width: 100px;
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  @media (max-width: 360px) {
+    .category-card {
+      height: 160px;
+      
+      button {
+        min-width: 90px;
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.home {
+  .featuredProducts:first-of-type {
+    padding-top: 60px;
+  }
+
+  .featuredProducts:last-of-type {
+    background: #f8fafc;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .home {
+    .featuredProducts:first-of-type {
+      padding-top: 40px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    .featuredProducts:first-of-type {
+      padding-top: 30px;
+    }
+  }
+}.home{
+    
+}

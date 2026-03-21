@@ -1,0 +1,180 @@
+.wishlist {
+  position: fixed;
+  right: 20px;
+  top: 90px;
+  width: 360px;
+  max-height: 80vh;
+  overflow-y: auto;
+
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+
+  z-index: 999;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 500;
+    color: #444;
+  }
+
+  p {
+    font-size: 14px;
+    color: gray;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+
+    img {
+      width: 80px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      h2 {
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      p {
+        color: #2879fe;
+        font-weight: 500;
+      }
+    }
+
+    .delete {
+      cursor: pointer;
+      color: #999;
+      transition: 0.2s;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+
+  button {
+    padding: 10px;
+    border: none;
+    background: #2879fe;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 768px) {
+  .wishlist {
+    width: 90%;
+    right: 5%;
+    top: 80px;
+  }
+}
+/* Wishlist responsive styles – matching cart design */
+
+/* Tablet and small desktop */
+@media (max-width: 900px) {
+  .wishlist {
+    width: 300px;
+    right: 12px;
+    top: 85px;
+    padding: 18px;
+  }
+}
+
+/* Small screens – keep wishlist right-aligned */
+@media (max-width: 620px) {
+  .wishlist {
+    width: 90%;
+    max-width: 350px;
+    right: 10px;
+    left: auto;        /* override any left positioning */
+    padding: 16px;
+  }
+
+  .wishlist h1 {
+    font-size: 19px;
+  }
+
+  .wishlist .item {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .wishlist .item img {
+    width: 65px;
+    height: 85px;
+  }
+
+  .wishlist .item .details h2 {
+    font-size: 14px;
+  }
+
+  .wishlist .item .details p {
+    font-size: 12px;
+  }
+
+  .wishlist .item .delete {
+    font-size: 22px;
+  }
+
+  .wishlist button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+  .wishlist {
+    padding: 14px;
+    right: 8px;        /* slightly tighter to edge */
+  }
+
+  .wishlist .item img {
+    width: 60px;
+    height: 80px;
+  }
+
+  .wishlist .item .delete {
+    font-size: 22px;
+  }
+
+  .wishlist button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* Very small phones – stack items vertically */
+@media (max-width: 350px) {
+  .wishlist .item {
+    flex-direction: column;
+  }
+
+  .wishlist .item img {
+    width: 100%;
+    height: auto;
+  }
+
+  .wishlist .item .delete {
+    align-self: flex-end;
+  }
+}
