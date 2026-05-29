@@ -17,7 +17,7 @@ const Slider = () => {
   const data = [
     {
       id: 1,
-      image: "https://images.pexels.com/photos/1549200/pexels-photo-1549200.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      image: "../../AssetsPhotos/Hero1.jpeg",
       title: "Summer Collection",
       subtitle: "Up to 50% Off on Latest Trends",
       ctaText: "Shop Now",
@@ -25,7 +25,7 @@ const Slider = () => {
     },
     {
       id: 2,
-      image: "https://images.pexels.com/photos/949670/pexels-photo-949670.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      image: "../../AssetsPhotos/Hero2.jpeg",
       title: "New Arrivals",
       subtitle: "Fresh Styles for Every Occasion",
       ctaText: "Explore",
@@ -33,7 +33,7 @@ const Slider = () => {
     },
     {
       id: 3,
-      image: "https://images.pexels.com/photos/837140/pexels-photo-837140.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      image: "../../AssetsPhotos/Hero3.jpeg",
       title: "Premium Quality",
       subtitle: "Crafted with Excellence & Care",
       ctaText: "Discover",
