@@ -5,9 +5,9 @@ import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import Hero1 from "../../AssetsPhotos/Hero1.jpeg";
-import Hero2 from "../../AssetsPhotos/Hero2.jpeg";
-import Hero3 from "../../AssetsPhotos/Hero3.jpeg";
+import Hero1 from "../../../AssetsPhotos/Hero1.jpeg";
+import Hero2 from "../../../AssetsPhotos/Hero2.jpeg";
+import Hero3 from "../../../AssetsPhotos/Hero3.jpeg";
 import "./Slider.scss";
 
 const Slider = () => {
@@ -20,7 +20,7 @@ const Slider = () => {
   const data = [
     {
       id: 1,
-      image: {Hero1},
+      image: Hero1,
       title: "Summer Collection",
       subtitle: "Up to 50% Off on Latest Trends",
       ctaText: "Shop Now",
@@ -28,15 +28,15 @@ const Slider = () => {
     },
     {
       id: 2,
-      image: {Hero2},
+      image: Hero2,
       title: "New Arrivals",
-      subtitle:{Hero1}"Fresh Styles for Every Occasion",
+      subtitle:"Fresh Styles for Every Occasion",
       ctaText: "Explore",
       link: "/products/21"
     },
     {
       id: 3,
-      image: {Hero3},
+      image: Hero3,
       title: "Premium Quality",
       subtitle: "Crafted with Excellence & Care",
       ctaText: "Discover",
