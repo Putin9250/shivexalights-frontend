@@ -28,7 +28,7 @@ const Categories = () => {
       <div className="categories-mobile">
         {categoriesData.map((cat) => (
           <div className="category-card" key={cat.id}>
-            <img src={cat.img} alt={cat.title} />
+            <img src={cat.img} alt={cat.title} loading="lazy"/>
             <button>
               <Link
                 to={`/products?category=${encodeURIComponent(cat.title)}`}
