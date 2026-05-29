@@ -20,7 +20,7 @@ const Product = () => {
 
   // Fetch product data
   const { data, loading, error } = useFetch(
-    `/products?filters[documentId][$eq]=${id}&populate=*`,
+    `/products/${id}`,
   );
 
   // ✅ useSelector called unconditionally at the top
@@ -30,11 +30,11 @@ const Product = () => {
   if (loading) return <p>Loading product...</p>;
   if (error) return <p>Error loading product.</p>;
 
-  const product = data?.[0];
+  const product = data;
   if (!product) return <p>Product not found.</p>;
 
   // ✅ Now product exists – we can safely use wishlist
-  const isInWishlist = wishlist.some((item) => item.id === product.id);
+  const isInWishlist = wishlist.some((item) => item._id === product._id);
 
   const baseUrl = import.meta.env.VITE_API_UPLOAD_URL || "";
 
@@ -103,23 +103,22 @@ const Product = () => {
 
         <div className="right">
           <h1>{product.title}</h1>
-
           <div className="price">
-            {product.OldPrice && (
-              <span className="oldPrice">${product.OldPrice}</span>
+            {product.oldPrice && (
+              <span className="oldPrice">${product.oldPrice}</span>
             )}
             <span className="currentPrice">${product.price}</span>
-            {product.OldPrice && (
+            {product.oldPrice && (
               <span className="discount">
                 {Math.round(
-                  ((product.OldPrice - product.price) / product.OldPrice) * 100,
+                  ((product.oldPrice - product.price) / product.oldPrice) * 100,
                 )}
                 % OFF
               </span>
             )}
           </div>
-          <p>{product.desc}</p>
-
+          <p>{product.description}</p> {/* not desc */}
+          <p>{product.description}</p>
           <div className="quantity">
             <button
               onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}
@@ -129,7 +128,6 @@ const Product = () => {
             {quantity}
             <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
           </div>
-
           <div className="actions">
             {/* Wishlist button with conditional active class */}
             <button
@@ -137,8 +135,7 @@ const Product = () => {
               onClick={() =>
                 dispatch(
                   toggleWishlist({
-                    id: product.id,
-                    documentId: product.documentId,
+                    _id: product._id,
                     title: product.title,
                     price: product.price,
                     img: getImageUrl(product.img),
@@ -154,8 +151,7 @@ const Product = () => {
               onClick={() =>
                 dispatch(
                   addToCart({
-                    id: product.id,
-                    documentId: product.documentId,
+                    _id: product._id,
                     title: product.title,
                     desc: product.desc,
                     img: getImageUrl(product.img),
@@ -176,7 +172,6 @@ const Product = () => {
               <ShareIcon />
             </button>
           </div>
-
           <div className="links">
             <div className="item">🚚 Free shipping</div>
             <div className="item">📦 Delivery in 3–5 days</div>

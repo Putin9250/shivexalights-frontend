@@ -59,7 +59,7 @@ const Checkout = () => {
 
     const cleanProducts = cartProducts.map((item) => ({
       id: item.id,
-      documentId: item.documentId,
+      documentId: item._id,
       title: item.title,
       quantity: item.quantity,
       price: item.price,
@@ -81,7 +81,7 @@ const Checkout = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:1337/api/orders",
+        `${import.meta.env.VITE_API_URL}/orders`,
         orderData,
       );
 
@@ -108,7 +108,7 @@ const Checkout = () => {
       const amountInPaise = totalPrice * 100;
 
       const { data: order } = await axios.post(
-        "http://localhost:1337/api/orders/create-razorpay-order",
+        `${import.meta.env.VITE_API_URL}/orders/create-razorpay-order`,
         { amount: amountInPaise },
       );
 
@@ -124,12 +124,12 @@ const Checkout = () => {
           email: formData.email,
           contact: formData.phoneNumber,
         },
-        theme: { color: "#2879fe" },
+        theme: { color: "#080808" },
 
         handler: async (response) => {
           const cleanProducts = cartProducts.map((item) => ({
             id: item.id,
-            documentId: item.documentId,
+            documentId: item._id,
             title: item.title,
             quantity: item.quantity,
             price: item.price,
@@ -151,7 +151,7 @@ const Checkout = () => {
 
           try {
             const res = await axios.post(
-              "http://localhost:1337/api/orders",
+              `${import.meta.env.VITE_API_URL}/orders`,
               orderData,
             );
 
@@ -203,7 +203,7 @@ const Checkout = () => {
           {cartProducts.map((item) => (
             <Link
               key={item.id}
-              to={`/product/${item.documentId || item.id}`}
+              to={`/product/${item._id || item.id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <div className="item">

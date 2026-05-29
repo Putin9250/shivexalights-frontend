@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createHashRouter, RouterProvider, Outlet } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Product from "./Pages/Product/Product";
 import Products from "./Pages/Products/Products";
@@ -21,19 +21,23 @@ const Layout = () => {
   );
 };
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
       {
+        path: "/products",
+        element: <Products />, // ✅ THIS FIXES YOUR ERROR
+      },
+      {
         path: "/products/:id",
         element: <Products />,
       },
       {
         path: "/product/:id",
-        element: <Product />,
+        element: <Product key={window.location.pathname} />,
       },
       { path: "/checkout", element: <Checkout /> },
       { path: "/order", element: <Orders /> },

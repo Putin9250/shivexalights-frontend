@@ -5,14 +5,14 @@ import "./Cards.scss";
 const Cards = ({ item }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imgError, setImgError] = useState(false);
-// console.log(item);
+  // console.log(item);
   const baseUrl = import.meta.env.VITE_API_UPLOAD_URL || "";
-
+  // console.log(item);
   // Get image URL regardless of format (string or Strapi object)
   const getImageUrl = (imgField) => {
     if (!imgField) return "";
-    if (typeof imgField === "string") return imgField;          // direct URL
-    if (imgField.url) return baseUrl + imgField.url;            // Strapi object
+    if (typeof imgField === "string") return imgField; // direct URL
+    if (imgField.url) return baseUrl + imgField.url; // Strapi object
     return "";
   };
 
@@ -30,7 +30,7 @@ const Cards = ({ item }) => {
   return (
     <Link
       className="link"
-      to={`/product/${item.documentId}`}
+      to={`/product/${item._id}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -42,8 +42,8 @@ const Cards = ({ item }) => {
               imgError
                 ? fallbackImage
                 : isHovered && hoverImgUrl
-                ? hoverImgUrl
-                : mainImgUrl || fallbackImage
+                  ? hoverImgUrl
+                  : mainImgUrl || fallbackImage
             }
             alt={item.title || "Product"}
             className="mainImg"
@@ -52,7 +52,7 @@ const Cards = ({ item }) => {
         </div>
         <h2>{item.title}</h2>
         <div className="prices">
-          {item.OldPrice && <h3 className="old-price">${item.OldPrice}</h3>}
+          {item.oldPrice && <h3 className="old-price">${item.oldPrice}</h3>}
           <h3 className="current-price">${item.price}</h3>
         </div>
       </div>

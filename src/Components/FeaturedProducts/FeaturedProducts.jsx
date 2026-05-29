@@ -4,10 +4,9 @@ import Cards from "../Cards/Cards";
 import useFetch from "../../Hooks/useFetch";
 
 const FeaturedProducts = ({ type }) => {
-    const { data, loading, error } = useFetch(
-      `/products?populate=*&[filters][type][$eq]=${type}`,
-    );
-
+  const { data, loading, error } = useFetch(`/products?featured=true`);
+  const filteredData =
+    type === "featured" ? data.filter((item) => item.isFeatured) : data;
   return (
     <div className="featuredProducts">
       <div className="container">
@@ -20,8 +19,8 @@ const FeaturedProducts = ({ type }) => {
           </p>
         </div>
         <div className="bottom">
-          {data.map((item) => (
-            <Cards item={item} key={item.id} />
+          {filteredData.map((item) => (
+            <Cards item={item} key={item._id} />
           ))}
         </div>
       </div>

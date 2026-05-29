@@ -7,13 +7,13 @@ import useFetch from "../../Hooks/useFetch";
 import { Link } from "react-router-dom";
 
 const TrendingProducts = () => {
-  const { data, loading, error } = useFetch(
-    "/products?populate=*&[filters][type][$eq]=trending"
-  );
+  const { data, loading, error } = useFetch("/products?trending=true");
 
   const handleViewAll = () => {
     window.location.href = "/products/trending";
   };
+
+  const trendingProducts = data.filter((item) => item.isTrending);
 
   return (
     <section className="trending-products-section">
@@ -32,9 +32,10 @@ const TrendingProducts = () => {
               shelves and loved by our customers worldwide.
             </p>
           </div>
-          <button className="view-all-btn" >
+          <button className="view-all-btn">
             <Link to={`/products/16`} className="link">
-            View All Trending</Link>
+              View All Trending
+            </Link>
             <EastOutlinedIcon className="arrow-icon" />
           </button>
         </div>
@@ -42,8 +43,8 @@ const TrendingProducts = () => {
         <div className="products-grid">
           {loading && <p>Loading trending products...</p>}
           {error && <p>Failed to load trending products.</p>}
-          {data?.map((item) => (
-            <Cards item={item} key={item.id} />
+          {trendingProducts.map((item) => (
+            <Cards item={item} key={item._id} />
           ))}
         </div>
       </div>

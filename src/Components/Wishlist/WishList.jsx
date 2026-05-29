@@ -31,7 +31,7 @@ const Wishlist = ({ onClose }) => {
         wishlist.map((item) => (
           <Link
             key={item.id}
-            to={`/product/${item.documentId || item.id}`}
+            to={`/product/${item._id || item.id}`}
             onClick={onClose}
             style={{ textDecoration: "none", color: "inherit" }}
           >

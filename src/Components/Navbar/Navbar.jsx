@@ -67,17 +67,17 @@ const Navbar = () => {
               <KeyboardArrowDownIcon />
             </div>
             <div className="item">
-              <Link className="link" to="/products/2" onClick={closeMenu}>
+              <Link className="link" to="/products?category=Women" onClick={closeMenu}>
                 Women
               </Link>
             </div>
             <div className="item">
-              <Link className="link" to="/products/4" onClick={closeMenu}>
+              <Link className="link" to="/products?category=Men" onClick={closeMenu}>
                 Men
               </Link>
             </div>
             <div className="item">
-              <Link className="link" to="/products/10" onClick={closeMenu}>
+              <Link className="link" to="/products?category=Children" onClick={closeMenu}>
                 Children
               </Link>
             </div>
@@ -176,17 +176,17 @@ const Navbar = () => {
           <div className="mobile-menu-section">
             <h3>Shop by Category</h3>
             <div className="mobile-menu-item">
-              <Link to="/products/2" onClick={closeMenu}>
+              <Link to="/products?category=Women" onClick={closeMenu}>
                 Women
               </Link>
             </div>
             <div className="mobile-menu-item">
-              <Link to="/products/4" onClick={closeMenu}>
+              <Link to="/products?category=Men" onClick={closeMenu}>
                 Men
               </Link>
             </div>
             <div className="mobile-menu-item">
-              <Link to="/products/10" onClick={closeMenu}>
+              <Link to="/products?category=Children" onClick={closeMenu}>
                 Children
               </Link>
             </div>

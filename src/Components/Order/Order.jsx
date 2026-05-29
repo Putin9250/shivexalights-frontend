@@ -23,7 +23,7 @@ const Orders = () => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:1337/api/orders?filters[userId][$eq]=${user.id}&sort[0]=createdAt:desc`,
+          `${import.meta.env.VITE_API_URL}/orders?filters[userId][$eq]=${user.id}&sort[0]=createdAt:desc`,
         );
         setOrders(res.data.data || []);
       } catch (err) {

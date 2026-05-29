@@ -5,9 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./RandomProducts.scss";
 
 const RandomProducts = ({ count = 4 }) => {
-  const { data, loading, error } = useFetch(
-    "/products?populate=*&pagination[limit]=20"
-  );
+  const { data, loading, error } = useFetch("/products");
 
   const [randomItems, setRandomItems] = useState([]);
 
@@ -43,57 +41,41 @@ const RandomProducts = ({ count = 4 }) => {
           const img2 = getImageUrl(product.img2);
 
           const discount =
-            product.OldPrice &&
-            Math.round(((product.OldPrice - product.price) / product.OldPrice) * 100);
+            product.oldPrice &&
+            Math.round(
+              ((product.oldPrice - product.price) / product.oldPrice) * 100,
+            );
 
           return (
             <Link
-              key={product.id}
-              to={`/product/${product.documentId}`}
+              key={product._id}
+              to={`/product/${product._id}`}
               className="rp-card"
             >
               <div className="rp-image">
-
                 {discount && <span className="badge">{discount}% OFF</span>}
 
-                <img
-                  src={img1}
-                  alt={product.title}
-                  className="main-img"
-                />
+                <img src={img1} alt={product.title} className="main-img" />
 
                 {img2 && (
-                  <img
-                    src={img2}
-                    alt={product.title}
-                    className="hover-img"
-                  />
+                  <img src={img2} alt={product.title} className="hover-img" />
                 )}
 
                 <button className="wishlist-btn">
                   <FavoriteBorderIcon />
                 </button>
-
               </div>
 
               <div className="rp-info">
-
                 <h3>{product.title}</h3>
 
                 <div className="price">
-
                   {product.OldPrice && (
-                    <span className="old">
-                      ${product.OldPrice}
-                    </span>
+                    <span className="old">${product.OldPrice}</span>
                   )}
 
-                  <span className="current">
-                    ${product.price}
-                  </span>
-
+                  <span className="current">${product.price}</span>
                 </div>
-
               </div>
             </Link>
           );

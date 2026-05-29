@@ -11,7 +11,7 @@ export const wishlistSlice = createSlice({
 
     toggleWishlist: (state, action) => {
       const index = state.products.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
 
       if (index >= 0) {
@@ -25,7 +25,7 @@ export const wishlistSlice = createSlice({
 
     removeFromWishlist: (state, action) => {
       state.products = state.products.filter(
-        (item) => item.id !== action.payload
+        (item) => item._id !== action.payload
       );
     },
 

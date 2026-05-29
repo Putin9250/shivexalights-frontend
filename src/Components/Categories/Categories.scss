@@ -1,6 +1,7 @@
 .categories {
   display: flex;
-  height: 80vh;
+  min-height: 80vh;
+  height: auto;
   gap: 10px;
   margin: 50px;
 
@@ -75,7 +76,7 @@
   }
 
   // Mobile layout (less than 768px)
-  @media (max-width = 768px) {
+  @media (max-width : 768px) {
     flex-direction: column;
     height: auto; ///not happy here 
     margin: 5px;

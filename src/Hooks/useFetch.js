@@ -13,9 +13,8 @@ const useFetch = (url) => {
 
         const res = await makeRequest.get(url);
 
-        console.log(res.data);
+        setData(res.data || []); // ✅ fixed
 
-        setData(res.data.data);
       } catch (err) {
         setError(true);
       }
