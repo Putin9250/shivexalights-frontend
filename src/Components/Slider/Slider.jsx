@@ -5,9 +5,9 @@ import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import Hero1 from "../../../AssetsPhotos/Hero1.jpeg";
-import Hero2 from "../../../AssetsPhotos/Hero2.jpeg";
-import Hero3 from "../../../AssetsPhotos/Hero3.jpeg";
+import Hero1 from "../../AssetsPhotos/Hero1.jpeg";
+import Hero2 from "../../AssetsPhotos/Hero2.jpeg";
+import Hero3 from "../../AssetsPhotos/Hero3.jpeg";
 import "./Slider.scss";
 
 const Slider = () => {

@@ -1,0 +1,325 @@
+$primary: #2879fe;
+$primaryHover: #1a5fd8;
+$text: #333;
+$textLight: #666;
+$border: #e5e5e5;
+$bg: #f8f9fb;
+$white: #fff;
+
+.about-page {
+  min-height: 100vh;
+  background: $bg;
+  position: relative;
+  overflow: hidden;
+}
+
+/* LIGHT EFFECTS */
+
+.light {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+}
+
+.light1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(40, 121, 254, 0.12);
+  top: -120px;
+  left: -120px;
+}
+
+.light2 {
+  width: 350px;
+  height: 350px;
+  background: rgba(40, 121, 254, 0.08);
+  right: -100px;
+  top: 25%;
+}
+
+.light3 {
+  width: 280px;
+  height: 280px;
+  background: rgba(40, 121, 254, 0.1);
+  bottom: -100px;
+  left: 40%;
+}
+
+/* HERO */
+
+.hero {
+  text-align: center;
+  padding: 120px 20px 100px;
+  position: relative;
+  z-index: 2;
+
+  .tag {
+    display: inline-block;
+    background: rgba(40, 121, 254, 0.1);
+    color: $primary;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+
+  h1 {
+    font-size: 4rem;
+    color: $text;
+    margin-bottom: 25px;
+
+    span {
+      color: $primary;
+    }
+  }
+
+  p {
+    max-width: 800px;
+    margin: auto;
+    color: $textLight;
+    line-height: 1.8;
+    font-size: 18px;
+  }
+}
+
+/* STORY */
+
+.story {
+  max-width: 1400px;
+  margin: auto;
+  padding: 80px 20px;
+
+  display: flex;
+  gap: 60px;
+  align-items: center;
+
+  .left {
+    flex: 1;
+
+    h2 {
+      font-size: 40px;
+      margin-bottom: 25px;
+      color: $text;
+    }
+
+    p {
+      color: $textLight;
+      line-height: 1.9;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+  }
+
+  .right {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+.glass-card {
+  background: rgba(255,255,255,.8);
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255,255,255,.9);
+
+  padding: 35px;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  transition: .3s;
+
+  svg {
+    font-size: 40px;
+    color: $primary;
+    margin-bottom: 15px;
+  }
+
+  h3 {
+    color: $text;
+  }
+
+  &:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 15px 35px rgba(0,0,0,.08);
+  }
+}
+
+/* STATS */
+
+.stats {
+  max-width: 1400px;
+  margin: auto;
+
+  padding: 80px 20px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 25px;
+}
+
+.stat {
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 35px;
+
+  text-align: center;
+
+  border: 1px solid $border;
+
+  h2 {
+    color: $primary;
+    font-size: 42px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $textLight;
+  }
+}
+
+/* MISSION */
+
+.vision {
+  max-width: 1400px;
+
+  margin: auto;
+
+  padding: 80px 20px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 30px;
+
+  .card {
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 40px;
+
+    border: 1px solid $border;
+
+    svg {
+      font-size: 38px;
+      color: $primary;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: $text;
+    }
+
+    p {
+      color: $textLight;
+      line-height: 1.8;
+    }
+  }
+}
+
+/* WHY US */
+
+.why-us {
+  max-width: 1400px;
+  margin: auto;
+  padding: 80px 20px 120px;
+
+  h2 {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 50px;
+    color: $text;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+
+  .box {
+    background: white;
+    border: 1px solid $border;
+    border-radius: 20px;
+    padding: 30px;
+
+    h3 {
+      margin-bottom: 15px;
+      color: $text;
+    }
+
+    p {
+      color: $textLight;
+      line-height: 1.7;
+    }
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .story {
+    flex-direction: column;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vision {
+    grid-template-columns: 1fr;
+  }
+
+  .why-us .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .story .right {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .why-us .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 90px;
+
+    h1 {
+      font-size: 2.2rem;
+    }
+
+    p {
+      font-size: 15px;
+    }
+  }
+
+  .story .left h2,
+  .why-us h2 {
+    font-size: 30px;
+  }
+}

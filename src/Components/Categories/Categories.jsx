@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Categories.scss";
 import { Link } from "react-router-dom";
-import SaleCat from "../../../AssetsPhotos/Sale_Cat.jpeg";
-import WomenCat from "../../../AssetsPhotos/Women_Cat.jpeg";
-import NewSeasonCat from "../../../AssetsPhotos/NewSeason_Cat.jpeg";
-import ManCat from "../../../AssetsPhotos/Man_Cat.jpeg";
-import AccessCat from "../../../AssetsPhotos/Access_Cat.jpeg";
-import ChildCat from "../../../AssetsPhotos/Child_Cat.webp";
+import SaleCat from "../../AssetsPhotos/Sale_Cat1.jpeg";
+import WomenCat from "../../AssetsPhotos/Women_Cat.jpeg";
+import NewSeasonCat from "../../AssetsPhotos/NewSeason_Cat.jpeg";
+import ManCat from "../../AssetsPhotos/Man_Cat.jpeg";
+import AccessCat from "../../AssetsPhotos/Access_Cat.jpeg";
+import ChildCat from "../../AssetsPhotos/Child_Cat.webp";
 
 const Categories = () => {
   const [isMobile, setIsMobile] = useState(false);

@@ -6,11 +6,12 @@ import "./Order.scss";
 
 const Orders = () => {
   const { user, isSignedIn, isLoaded } = useUser();
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const baseUrl = import.meta.env.VITE_API_UPLOAD_URL || "";
 
-  // Helper to get full image URL (same as in Cart and Product)
   const getImageUrl = (imgField) => {
     if (!imgField) return "";
     if (typeof imgField === "string") return imgField;
@@ -20,14 +21,18 @@ const Orders = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      setLoading(true);
       try {
+        setLoading(true);
+
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/orders?filters[userId][$eq]=${user.id}&sort[0]=createdAt:desc`,
+          `${import.meta.env.VITE_API_URL}/orders/user/${user.id}`
         );
-        setOrders(res.data.data || []);
+
+        console.log("Orders:", res.data);
+
+        setOrders(res.data || []);
       } catch (err) {
-        console.error("❌ Fetch error:", err);
+        console.error("Order Fetch Error:", err);
       } finally {
         setLoading(false);
       }
@@ -35,13 +40,21 @@ const Orders = () => {
 
     if (isLoaded && isSignedIn && user?.id) {
       fetchOrders();
-    } else {
+    } else if (isLoaded) {
       setLoading(false);
     }
   }, [isLoaded, isSignedIn, user]);
 
-  // Not signed in
-  if (!isSignedIn && !loading) {
+  if (!isLoaded || loading) {
+    return (
+      <div className="orders-loading">
+        <div className="spinner"></div>
+        <p>Loading your orders...</p>
+      </div>
+    );
+  }
+
+  if (!isSignedIn) {
     return (
       <div className="orders-auth">
         <h2>Please sign in to view your orders</h2>
@@ -52,113 +65,132 @@ const Orders = () => {
     );
   }
 
-  // Loading state
-  if (loading) {
+  if (orders.length === 0) {
     return (
-      <div className="orders-loading">
-        <div className="spinner"></div>
-        <p>Loading your orders...</p>
+      <div className="orders-empty">
+        <h2>No orders found</h2>
       </div>
     );
   }
 
-  // Empty orders
-  if (orders.length === 0) {
-    return <div className="orders-empty">You have no orders yet.</div>;
-  }
-
-  // Helper to generate a user‑friendly order ID
   const generateOrderId = (order) => {
     const date = new Date(order.createdAt);
     const shortDate = `${date.getDate()}${date.getMonth() + 1}${date.getFullYear()}`;
-    const status = order.orderStatus || "PAID";
-    return `${status}-${order.id}-${shortDate}`;
+
+    return `ORD-${order._id.slice(-6)}-${shortDate}`;
   };
 
   return (
     <div className="orders">
       <h1>My Orders</h1>
 
-      {orders.map((order) => {
-        const data = order;
-        const isCOD = data.orderStatus === "COD";
-        const paymentId = data.paymentId || "Missing";
-        const total = data.totalAmount || 0;
+      {orders.map((order) => (
+        <div className="order-card" key={order._id}>
+          <div className="order-header">
+            <div className="order-info">
+              <p>
+                <strong>Order ID</strong>
+                <span>{generateOrderId(order)}</span>
+              </p>
 
-        return (
-          <div className="order-card" key={data.id}>
-            <div className="order-header">
-              <div className="order-info">
-                <p>
-                  <strong>Order ID</strong>
-                  <span>{generateOrderId(data)}</span>
-                </p>
-                <p>
-                  <strong>Payment ID</strong>
-                  <span>{paymentId}</span>
-                </p>
-                <p>
-                  <strong>Status</strong>
-                  <span className={isCOD ? "cod" : "paid"}>
-                    {isCOD ? "Cash on Delivery" : "Paid"}
-                  </span>
-                </p>
-                <p>
-                  <strong>Date</strong>
-                  <span>
-                    {data.createdAt
-                      ? new Date(data.createdAt).toLocaleString()
-                      : "N/A"}
-                  </span>
-                </p>
-              </div>
-            </div>
+              <p>
+                <strong>Payment ID</strong>
+                <span>{order.paymentId || "N/A"}</span>
+              </p>
 
-            <div className="products">
-              {data.products?.map((item, idx) => {
-                const productId = item.documentId || item.id;
-                const productLink = productId ? `/product/${productId}` : "#";
+              <p>
+                <strong>Status</strong>
+                <span
+                  className={
+                    order.orderStatus === "COD" ? "cod" : "paid"
+                  }
+                >
+                  {order.orderStatus}
+                </span>
+              </p>
 
-                return (
-                  <Link
-                    key={idx}
-                    to={productLink}
-                    className="product"
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    <div className="image-wrapper">
-                      <img
-                        src={getImageUrl(item.img) || getImageUrl(item.image)}
-                        alt={item.title}
-                      />
-                      <span
-                        className={`badge ${data.orderStatus?.toLowerCase()}`}
-                      >
-                        {data.orderStatus === "OUT_FOR_DELIVERY"
-                          ? "Out for Delivery"
-                          : data.orderStatus || "Processing"}
-                      </span>
-                    </div>
-                    <div className="product-details">
-                      <h4>{item.title}</h4>
-                      <p>
-                        {item.quantity} × ₹{item.price}
-                      </p>
-                    </div>
-                    <span className="product-price">
-                      ₹{item.quantity * item.price}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
+              <p>
+                <strong>Date</strong>
+                <span>
+                  {new Date(order.createdAt).toLocaleString()}
+                </span>
+              </p>
 
-            <div className="order-footer">
-              <strong>Total: ₹{total}</strong>
+              <p>
+                <strong>Address</strong>
+                <span>
+                  {order.address}, {order.pin}
+                </span>
+              </p>
+
+              <p>
+                <strong>Phone</strong>
+                <span>{order.phoneNumber}</span>
+              </p>
             </div>
           </div>
-        );
-      })}
+
+          <div className="products">
+            {order.products?.map((item, idx) => {
+              const productId =
+                item._id ||
+                item.productId ||
+                item.id ||
+                item.documentId;
+
+              return (
+                <Link
+                  key={idx}
+                  to={productId ? `/product/${productId}` : "#"}
+                  className="product"
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                >
+                  <div className="image-wrapper">
+                    <img
+                      src={
+                        getImageUrl(item.img) ||
+                        getImageUrl(item.image)
+                      }
+                      alt={item.title}
+                    />
+
+                    <span
+                      className={`badge ${(
+                        order.orderStatus || ""
+                      ).toLowerCase()}`}
+                    >
+                      {order.orderStatus}
+                    </span>
+                  </div>
+
+                  <div className="product-details">
+                    <h4>{item.title}</h4>
+
+                    <p>
+                      Quantity: {item.quantity}
+                    </p>
+
+                    <p>
+                      ₹{item.price} each
+                    </p>
+                  </div>
+
+                  <span className="product-price">
+                    ₹{item.price * item.quantity}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="order-footer">
+            <strong>Total: ₹{order.totalAmount}</strong>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

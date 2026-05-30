@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./RandomProducts.scss";
 
 const RandomProducts = ({ count = 4 }) => {
@@ -61,9 +60,6 @@ const RandomProducts = ({ count = 4 }) => {
                   <img src={img2} alt={product.title} className="hover-img" />
                 )}
 
-                <button className="wishlist-btn">
-                  <FavoriteBorderIcon />
-                </button>
               </div>
 
               <div className="rp-info">

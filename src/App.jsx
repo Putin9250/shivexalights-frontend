@@ -9,6 +9,8 @@ import Checkout from "./Components/Checkout/Checkout";
 import Orders from "./Components/Order/Order";
 
 import "./App.scss";
+import Contact from "./Pages/Contact/Contact";
+import About from "./Pages/About/About";
 
 const Layout = () => {
   ScrollToTop();
@@ -40,7 +42,10 @@ const router = createHashRouter([
         element: <Product key={window.location.pathname} />,
       },
       { path: "/checkout", element: <Checkout /> },
+      { path: "/Contact", element: <Contact /> },
+      { path: "/About", element: <About /> },
       { path: "/order", element: <Orders /> },
+
     ],
   },
   {
