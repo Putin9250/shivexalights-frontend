@@ -7,6 +7,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import PaymentMethodPhoto from "../../../Images/payment.png"
 import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -105,7 +106,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="payment-methods">
-            <img src="/Images/payment.png" alt="Accepted payment methods" />
+            <img src={ PaymentMethodPhoto} alt="Accepted payment methods" loading="lazy"/>
           </div>
         </div>
       </div>
