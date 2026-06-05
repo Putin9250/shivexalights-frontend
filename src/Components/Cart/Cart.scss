@@ -1,0 +1,177 @@
+.cart {
+  position: fixed;
+  right: 20px;
+  top: 90px;
+  width: 360px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 999;
+  background: white;
+  padding: 22px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 8px 25px -10px rgba(0,0,0,0.35);
+  box-shadow: 0px 8px 25px -10px rgba(0,0,0,0.35);
+
+  h1 {
+    margin-bottom: 25px;
+    color: #666;
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+
+    img {
+      width: 80px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .details {
+      flex: 1;
+
+      h1 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        line-height: 1.3;
+      }
+
+      p {
+        color: #777;
+        margin-bottom: 8px;
+        font-size: 13px;
+      }
+
+      .price {
+        color: #2879fe;
+        font-weight: 500;
+      }
+    }
+
+    .delete {
+      color: red;
+      font-size: 26px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+  }
+
+  .total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 18px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #2879fe;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  .reset {
+    color: red;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .cart {
+    width: 300px;
+    right: 12px;
+    top: 85px;
+    padding: 18px;
+  }
+}
+
+/* Small screens – keep cart right-aligned */
+@media (max-width: 620px) {
+  .cart {
+    width: 90%;
+    max-width: 350px;
+    right: 10px;
+    left: auto;        /* override any left positioning */
+    padding: 16px;
+  }
+
+  .cart h1 {
+    font-size: 19px;
+  }
+
+  .item {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .item img {
+    width: 65px;
+    height: 85px;
+  }
+
+  .item .details h1 {
+    font-size: 14px;
+  }
+
+  .item .details p {
+    font-size: 12px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+  .cart {
+    padding: 14px;
+    right: 8px;        /* slightly tighter to edge */
+  }
+
+  .item img {
+    width: 60px;
+    height: 80px;
+  }
+
+  .item .delete {
+    font-size: 22px;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* Very small phones – stack items vertically */
+@media (max-width: 350px) {
+  .item {
+    flex-direction: column;
+  }
+
+  .item img {
+    width: 100%;
+    height: auto;
+  }
+
+  .item .delete {
+    align-self: flex-end;
+  }
+}

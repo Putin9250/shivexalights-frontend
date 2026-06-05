@@ -1,0 +1,400 @@
+// ============================================
+//  VARIABLES (adjust to your theme)
+// ============================================
+$primary: #4361ee;
+$primary-hover: #3a56d4;
+$text-dark: #1e293b;
+$text-muted: #64748b;
+$bg-light: #f8fafc;
+$border-light: #e2e8f0;
+$shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+$shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+$status-paid: #10b981;
+$status-cod: #f59e0b;
+$status-processing: #fcd34d;
+$status-shipped: #3b82f6;
+$status-out: #8b5cf6;
+$status-delivered: #10b981;
+$status-cancelled: #ef4444;
+
+// ============================================
+//  MAIN LAYOUT
+// ============================================
+.orders {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  min-height: 100vh;
+  background: #fff;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: $text-dark;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      width: 4rem;
+      height: 0.25rem;
+      background: $primary;
+      border-radius: 2rem;
+    }
+  }
+}
+
+// ============================================
+//  AUTH / EMPTY / LOADING STATES
+// ============================================
+.orders-auth,
+.orders-empty,
+.orders-loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60vh;
+  padding: 2rem;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: $text-dark;
+  }
+
+  .login-btn {
+    background: $primary;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: $primary-hover;
+    }
+  }
+}
+
+.orders-loading {
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba($primary, 0.2);
+    border-top-color: $primary;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $text-muted;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orders-empty {
+  font-size: 1.1rem;
+  color: $text-muted;
+  background: $bg-light;
+  border-radius: 1rem;
+  margin-top: 2rem;
+  padding: 3rem;
+}
+
+// ============================================
+//  ORDER CARD
+// ============================================
+.order-card {
+  background: white;
+  border-radius: 1.5rem;
+  margin-bottom: 1.75rem;
+  box-shadow: $shadow-sm;
+  transition: all 0.25s ease;
+  overflow: hidden;
+  border: 1px solid $border-light;
+
+  // 🔥 CRITICAL FIX: prevent flex stretching
+  display: block;
+  height: auto;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-hover;
+  }
+
+  // Header section
+  .order-header {
+    padding: 1rem 1.5rem;
+    background: $bg-light;
+    border-bottom: 1px solid $border-light;
+
+    .order-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem 1.5rem;
+
+      p {
+        margin: 0;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 0.25rem 0.5rem;
+
+        strong {
+          font-weight: 600;
+          color: $text-dark;
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+        }
+
+        span {
+          color: $text-muted;
+          font-weight: 500;
+        }
+
+        .paid {
+          color: $status-paid;
+          font-weight: 600;
+        }
+        .cod {
+          color: $status-cod;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  // Products container – main white space fix
+  .products {
+    padding: 1rem 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+
+    // 🔥 WHITE SPACE KILLER
+    height: auto;
+    min-height: 0;
+    flex: unset;
+    align-items: start;   // prevents grid rows from stretching
+  }
+
+  // Individual product item
+  .product {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: $bg-light;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background: #f1f5ff;
+      transform: translateY(-2px);
+    }
+
+    .image-wrapper {
+      position: relative;
+      flex-shrink: 0;
+      width: 70px;
+      height: 70px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0.75rem;
+        border: 1px solid $border-light;
+        background: #f3f4f6;
+      }
+
+      .badge {
+        position: absolute;
+        top: -6px;
+        left: -6px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 0.2rem 0.6rem;
+        border-radius: 1rem;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        backdrop-filter: blur(2px);
+
+        &.processing { background: $status-processing; color: #3b2e1e; }
+        &.shipped { background: $status-shipped; }
+        &.out_for_delivery { background: $status-out; }
+        &.delivered { background: $status-delivered; }
+        &.cancelled { background: $status-cancelled; }
+        &.cod { background: $status-cod; }
+        &.paid { background: $status-paid; }
+      }
+    }
+
+    .product-details {
+      flex: 1;
+
+      h4 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 0 0 0.25rem;
+        color: $text-dark;
+      }
+
+      p {
+        font-size: 0.8rem;
+        color: $text-muted;
+        margin: 0;
+      }
+    }
+
+    .product-price {
+      font-weight: 700;
+      color: $primary;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+  }
+
+  // Footer section
+  .order-footer {
+    padding: 0.75rem 1.5rem;
+    text-align: right;
+    border-top: 1px solid $border-light;
+    background: $bg-light;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $primary;
+  }
+}
+
+// ============================================
+//  RESPONSIVE DESIGN
+// ============================================
+@media (max-width: 768px) {
+  .orders {
+    padding: 1rem;
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .order-card {
+    margin-bottom: 1.25rem;
+
+    .order-header {
+      padding: 0.75rem 1rem;
+
+      .order-info {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+
+        p {
+          justify-content: space-between;
+          border-bottom: 1px dashed $border-light;
+          padding-bottom: 0.25rem;
+        }
+      }
+    }
+
+    .products {
+      padding: 0.75rem;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+
+      .product {
+        gap: 0.75rem;
+        padding: 0.5rem;
+
+        .image-wrapper {
+          width: 60px;
+          height: 60px;
+
+          .badge {
+            font-size: 0.6rem;
+            padding: 0.15rem 0.5rem;
+          }
+        }
+
+        .product-details {
+          h4 { font-size: 0.85rem; }
+          p { font-size: 0.7rem; }
+        }
+
+        .product-price { font-size: 0.85rem; }
+      }
+    }
+
+    .order-footer {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .orders {
+    padding: 0.75rem;
+  }
+
+  .order-card .products .product {
+    .image-wrapper {
+      width: 55px;
+      height: 55px;
+    }
+    .product-details h4 { font-size: 0.8rem; }
+  }
+}
+
+@media (max-width: 480px) {
+  .orders {
+    padding: 0.5rem;
+  }
+
+  .order-card .products .product {
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .image-wrapper {
+      width: 50px;
+      height: 50px;
+    }
+
+    .product-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .product-price {
+      width: 100%;
+      text-align: right;
+      margin-top: 0.25rem;
+    }
+  }
+}

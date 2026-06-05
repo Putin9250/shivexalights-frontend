@@ -1,0 +1,351 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Chandelier.scss  —  Dark Luxury Editorial  (Italian Chandeliers)
+// Fonts loaded via Google Fonts; add to <head> if not already present:
+//   Cormorant Garamond (300, 400, 600, italic variants)
+//   Josefin Sans (300, 400, 600)
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Design tokens ─────────────────────────────────────────────────────────────
+$gold:          #c9a96e;
+$gold-light:    #e2c99a;
+$gold-dim:      rgba(#c9a96e, 0.18);
+$ink:           #0f0d0b;         // section background
+$ink-card:      #1c1916;         // card face
+$ink-hover:     #231f1a;         // card hover
+$cream:         #f4ede0;         // primary text on dark
+$muted:         #8c8070;         // secondary text
+$ease-out:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Section wrapper
+// ─────────────────────────────────────────────────────────────────────────────
+.ch-section {
+  position: relative;
+  background: $ink;
+  padding: 0 0 64px;
+  overflow: hidden;
+
+  // Ambient glow: faint radial warmth from center-top
+  &::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 300px;
+    background: radial-gradient(ellipse at center top, rgba($gold, 0.07), transparent 70%);
+    pointer-events: none;
+  }
+}
+
+// Decorative gold rule at the very top of the section
+.ch-gold-rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba($gold, 0.5) 30%,
+    rgba($gold, 0.8) 50%,
+    rgba($gold, 0.5) 70%,
+    transparent 100%
+  );
+  margin-bottom: 64px;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Layout container
+// ─────────────────────────────────────────────────────────────────────────────
+.ch-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 0 48px;
+
+  @media (max-width: 768px) { padding: 0 20px; }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Section header
+// ─────────────────────────────────────────────────────────────────────────────
+.ch-header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.ch-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+
+  &__line {
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $gold);
+
+    &--flip {
+      background: linear-gradient(270deg, transparent, $gold);
+    }
+  }
+
+  &__text {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 4.5px;
+    text-transform: uppercase;
+    color: $gold;
+  }
+}
+
+.ch-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  color: $cream;
+  letter-spacing: 1px;
+  line-height: 1.05;
+  margin: 0 0 14px;
+}
+
+.ch-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-style: italic;
+  color: $muted;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Carousel shell
+// ─────────────────────────────────────────────────────────────────────────────
+.ch-carousel {
+  position: relative;  // anchor for abs-positioned arrows
+
+  // Reveal arrows on hover (desktop)
+  &:hover .ch-arrow {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.ch-track-wrap {
+  width: 100%;
+  overflow: hidden;  // clips the sliding strip
+}
+
+.ch-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.55s $ease-out;
+  will-change: transform;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Card
+// ─────────────────────────────────────────────────────────────────────────────
+.ch-card {
+  flex-shrink: 0;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  background: $ink-card;
+  border: 1px solid $gold-dim;
+  overflow: hidden;
+  transition:
+    border-color 0.35s ease,
+    background   0.35s ease,
+    box-shadow   0.35s ease,
+    transform    0.3s  $ease-out;
+
+  &:hover {
+    border-color: rgba($gold, 0.38);
+    background: $ink-hover;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55);
+    transform: translateY(-3px);
+
+    .ch-card__img-wrap img { transform: scale(1.07); }
+    .ch-card__overlay       { opacity: 1; }
+    .ch-card__cta           { letter-spacing: 4px; }
+  }
+}
+
+// --- Image zone ---
+.ch-card__img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;   // portrait — suits hanging chandeliers perfectly
+  overflow: hidden;
+  background: #211b14;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.75s $ease-out;
+  }
+}
+
+.ch-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba($ink, 0.52);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.38s ease;
+}
+
+.ch-card__cta {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: $gold;
+  border: 1px solid rgba($gold, 0.55);
+  padding: 11px 22px;
+  transition: letter-spacing 0.3s $ease-out, background 0.25s, border-color 0.25s;
+
+  &:hover {
+    background: rgba($gold, 0.08);
+    border-color: $gold;
+  }
+}
+
+// --- Text body ---
+.ch-card__body {
+  padding: 16px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid $gold-dim;
+  flex: 1;
+}
+
+.ch-card__tag {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba($gold, 0.55);
+}
+
+.ch-card__name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: $cream;
+  margin: 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ch-card__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.ch-card__price {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: $gold-light;
+  letter-spacing: 0.5px;
+}
+
+.ch-card__old {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: $muted;
+  text-decoration-color: rgba($muted, 0.5);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Navigation arrows  (abs-positioned → never affect card layout math)
+// ─────────────────────────────────────────────────────────────────────────────
+.ch-arrow {
+  position: absolute;
+  top: 38%;             // vertically centred in the image zone
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba($gold, 0.28);
+  background: rgba($ink, 0.75);
+  color: rgba($gold, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;           // hidden by default; .ch-carousel:hover shows them
+  pointer-events: none;
+  transition: opacity 0.3s ease, background 0.3s, border-color 0.3s, color 0.3s;
+
+  svg { width: 18px; height: 18px; }
+
+  &--prev { left: 10px; }
+  &--next { right: 10px; }
+
+  &:hover {
+    background: $gold;
+    border-color: $gold;
+    color: $ink;
+  }
+
+  // Always visible on touch / small screens
+  @media (max-width: 860px) {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Dot indicators  (thin lines, not circles)
+// ─────────────────────────────────────────────────────────────────────────────
+.ch-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 38px;
+}
+
+.ch-dot {
+  height: 1px;
+  width: 28px;
+  padding: 0;
+  border: none;
+  background: rgba($gold, 0.22);
+  cursor: pointer;
+  transition: width 0.38s $ease-spring, background 0.3s;
+
+  &.active {
+    width: 52px;
+    background: $gold;
+  }
+
+  &:hover:not(.active) {
+    background: rgba($gold, 0.45);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Responsive tweaks
+// ─────────────────────────────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .ch-gold-rule { margin-bottom: 40px; }
+  .ch-header    { margin-bottom: 36px; }
+}
