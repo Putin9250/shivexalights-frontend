@@ -1,27 +1,25 @@
 import React, { useEffect, useRef } from "react";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import { useSelector, useDispatch } from "react-redux";
-import "./Cart.scss";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useSelector, useDispatch } from "react-redux";
 import { removeItem, resetCart } from "../../redux/cartReducer";
+import "./Cart.scss";
+
+// Icons
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 const Cart = ({ onClose }) => {
-  const cartRef = useRef(); // ref for the cart container
-  const products = useSelector((state) => state.cart.products);
+  const cartRef = useRef();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.cart.products);
+
   const totalPrice = products.reduce(
     (total, item) => total + item.price * item.quantity,
-    0,
+    0
   );
-  const dispatch = useDispatch();
-  // Handle checkout button click
-  const handleCheckout = () => {
-    onClose(); // close the cart overlay
-    navigate("/checkout"); // go to checkout page
-  };
 
-  // Close cart when clicking outside
+  // Close on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (cartRef.current && !cartRef.current.contains(e.target)) {
@@ -32,48 +30,81 @@ const Cart = ({ onClose }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
+  const handleCheckout = () => {
+    onClose();
+    navigate("/checkout");
+  };
+
   return (
-    <div className="cart" ref={cartRef}>
-      <h1>Products in Your Cart</h1>
+    <div className="cart-overlay">
+      <div className="cart-container" ref={cartRef}>
+        <div className="cart-header">
+          <h2>
+            <ShoppingBagOutlinedIcon /> Your Cart ({products.length})
+          </h2>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
 
-      {products?.map((item) => (
-        <Link
-          key={item.id}
-          to={`/product/${item._id || item.id}`}
-          onClick={onClose}
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <div className="item" key={item.id}>
-            <img src={item.img} alt={item.title} />
-
-            <div className="details">
-              <h1>{item.title}</h1>
-              <p>{item?.description?.substring(0, 100)}</p>
-              <div className="price">
-                {item.quantity} × ${item.price}
-              </div>
+        <div className="cart-items">
+          {products.length === 0 ? (
+            <div className="empty-cart">
+              <ShoppingBagOutlinedIcon />
+              <p>Your cart is empty</p>
+              <button className="shop-now-btn" onClick={onClose}>
+                Continue Shopping
+              </button>
             </div>
-            <DeleteOutlinedIcon
-              className="delete"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                dispatch(removeItem(item._id));
-              }}
-            />
+          ) : (
+            products.map((item) => (
+              <div className="cart-item" key={item.id}>
+                <Link
+                  to={`/product/${item._id || item.id}`}
+                  onClick={onClose}
+                  className="item-link"
+                >
+                  <img src={item.img} alt={item.title} loading="lazy"/>
+                </Link>
+                <div className="item-details">
+                  <Link
+                    to={`/product/${item._id || item.id}`}
+                    onClick={onClose}
+                    className="item-title"
+                  >
+                    {item.title}
+                  </Link>
+                  <p className="item-price">₹{item.price} × {item.quantity}</p>
+                </div>
+                <div className="item-total">
+                  ₹{item.price * item.quantity}
+                </div>
+                <DeleteOutlineIcon
+                  className="delete-icon"
+                  onClick={() => dispatch(removeItem(item._id))}
+                />
+              </div>
+            ))
+          )}
+        </div>
+
+        {products.length > 0 && (
+          <div className="cart-footer">
+            <div className="total-row">
+              <span>Subtotal</span>
+              <span>₹{totalPrice}</span>
+            </div>
+            <div className="total-row final">
+              <span>Total</span>
+              <span>₹{totalPrice}</span>
+            </div>
+            <button className="checkout-btn" onClick={handleCheckout}>
+              Proceed to Checkout
+            </button>
+            <button className="reset-cart-btn" onClick={() => dispatch(resetCart())}>
+              Empty Cart
+            </button>
           </div>
-        </Link>
-      ))}
-
-      <div className="total">
-        <span>SUBTOTAL</span>
-        <span>${totalPrice}</span>
+        )}
       </div>
-
-      <button onClick={handleCheckout}>PROCEED TO CHECKOUT</button>
-      <span className="reset" onClick={() => dispatch(resetCart())}>
-        Reset Cart
-      </span>
     </div>
   );
 };

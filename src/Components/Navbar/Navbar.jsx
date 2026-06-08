@@ -224,7 +224,7 @@ const Navbar = () => {
             <Link to="/order" onClick={closeMobileMenu}>Orders</Link>
             <Link to="/about" onClick={closeMobileMenu}>About</Link>
             <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
-            <Link to="/products/Collection" onClick={closeMobileMenu}>Store</Link>
+            <Link to="/products/Collection" onClick={closeMobileMenu}>Collection</Link>
           </div>
           <div className="mobile-section">
             <h4>Account</h4>

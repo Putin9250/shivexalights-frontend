@@ -1,76 +1,283 @@
-.featuredProducts {
-  padding: 
-  40px 0;
-  background-color: #ffffff;
+// FeaturedProducts.scss – two‑column layout, horizontal slider, arrows at bottom right
 
-  .container {
-    max-width: 1400px;
+$gold: #c9a86a;
+$dark: #1e1e1e;
+$text-muted: #5a6874;
+$bg-warm: #faf8f4;
+$white: #ffffff;
+$border-light: #ece5dc;
+$transition: all 0.3s ease;
+
+.featured-editorial {
+  background: $bg-warm;
+  padding: 5rem 0;
+  font-family: 'Inter', sans-serif;
+
+  .featured-container {
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 20px;
-
-    @media (max-width: 768px) {
-      padding: 0 15px;
-    }
-  }
-
-  .top {
+    padding: 0 2rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 50px;
+    gap: 4rem;
 
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #1a202c;
-      text-transform: capitalize;
-
-      @media (max-width: 768px) {
-        font-size: 2rem;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 1.8rem;
-      }
+    @media (max-width: 1024px) {
+      flex-direction: column;
+      gap: 3rem;
     }
+    @media (max-width: 768px) {
+      padding: 0 1.2rem;
+    }
+  }
 
-    p {
-      max-width: 800px;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #4a5568;
-      margin: 0 auto;
+  // ========== LEFT HERO ==========
+  .featured-hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
 
-      @media (max-width: 768px) {
-        font-size: 1rem;
+    .hero-inner {
+      max-width: 460px;
+      .hero-label {
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: $gold;
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 1rem;
       }
-
-      @media (max-width: 480px) {
-        font-size: 0.95rem;
+      .hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.3rem;
+        font-weight: 500;
+        color: $dark;
+        margin-bottom: 1.2rem;
+        line-height: 1.2;
+        span {
+          color: $gold;
+          font-weight: 400;
+        }
+        @media (max-width: 768px) {
+          font-size: 2.4rem;
+        }
+      }
+      .hero-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: $text-muted;
+        margin-bottom: 2rem;
+      }
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: $dark;
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1.2px solid $gold;
+        padding-bottom: 0.3rem;
+        transition: gap 0.2s;
+        svg {
+          font-size: 0.9rem;
+          transition: transform 0.2s;
+        }
+        &:hover {
+          gap: 0.9rem;
+          svg {
+            transform: translateX(3px);
+          }
+        }
       }
     }
   }
 
-  .bottom {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+  // ========== RIGHT SLIDER ==========
+  .featured-slider {
+    flex: 2;
+    position: relative;
+    overflow: hidden;
 
-    @media (max-width: 1200px) {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.2rem;
+      .slider-eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        color: $gold;
+        font-weight: 500;
+      }
+      .slider-count {
+        font-size: 0.75rem;
+        color: $text-muted;
+      }
     }
 
-    @media (max-width: 992px) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+    .slider-track {
+      display: flex;
+      gap: 1.8rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 0.5rem 0 2rem 0;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .product-slide {
+        flex: 0 0 calc(33.333% - 1.2rem);
+        scroll-snap-align: start;
+        transition: transform 0.2s;
+
+        @media (max-width: 1000px) {
+          flex: 0 0 calc(33.33% - 0.9rem);
+        }
+        @media (max-width: 768px) {
+          flex: 0 0 calc(33.33% - 0.5rem);
+        }
+        @media (max-width: 560px) {
+          flex: 0 0 50%;
+        }
+      }
     }
 
-    @media (max-width: 576px) {
-      grid-template-columns: 1fr;
-      gap: 20px;
+    .product-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: $white;
+        border: 1px solid $border-light;
+        border-radius: 40px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: $dark;
+
+        svg {
+          font-size: 1rem;
+        }
+
+        &.btn-cart.active,
+        &.btn-wishlist.active {
+          background: $gold;
+          border-color: $gold;
+          color: $white;
+        }
+        &:hover {
+          background: $gold;
+          border-color: $gold;
+          color: $white;
+        }
+      }
     }
+
+    // Arrows at bottom right
+    .slider-controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+
+      .arrow {
+        background: $white;
+        border: 1px solid $border-light;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: $dark;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+        &:hover:not(:disabled) {
+          background: $gold;
+          color: $white;
+          border-color: $gold;
+        }
+        &:disabled {
+          opacity: 0.3;
+          cursor: default;
+        }
+      }
+    }
+
+    .load-more-wrap {
+      text-align: center;
+      margin-top: 1rem;
+      .load-more-btn {
+        background: transparent;
+        border: 1px solid $gold;
+        padding: 0.8rem 2.5rem;
+        border-radius: 60px;
+        font-weight: 500;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.2s;
+        &:hover {
+          background: $gold;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 14px rgba(201, 168, 106, 0.3);
+        }
+      }
+    }
+  }
+
+  // ========== LOADING SKELETON ==========
+  .featured-loading {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    gap: 4rem;
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
+    .loading-hero {
+      flex: 1;
+      height: 280px;
+      background: #e8e4dc;
+      border-radius: 20px;
+      animation: shimmer 1.2s infinite;
+    }
+    .loading-slider {
+      flex: 2;
+      display: flex;
+      gap: 1.8rem;
+      .card-skeleton {
+        flex: 1;
+        height: 380px;
+        background: #e8e4dc;
+        border-radius: 20px;
+        animation: shimmer 1.2s infinite;
+      }
+    }
+  }
+
+  .featured-error {
+    text-align: center;
+    padding: 5rem;
+    color: $gold;
+  }
+
+  @keyframes shimmer {
+    0% { background-color: #ece7df; }
+    50% { background-color: #f6f2ea; }
+    100% { background-color: #ece7df; }
   }
 }

@@ -1,138 +1,298 @@
-.trending-products-section {
-  padding: 80px 0;
+// TrendingProducts.scss – elegant, buttons below cards, mobile swipe
 
-  .container {
-    max-width: 1400px;
+$orange: #b87333;
+$dark: #1e1e1e;
+$text-muted: #5a6874;
+$bg-warm: #fefaf5;
+$white: #ffffff;
+$border-light: #ece5dc;
+$transition: all 0.3s ease;
+
+.trending-luxury {
+  padding: 6rem 0;
+  background: $bg-warm;
+  font-family: 'Inter', sans-serif;
+
+  .luxury-container {
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 50px;
+    padding: 0 2rem;
 
     @media (max-width: 768px) {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
-      margin-bottom: 40px;
+      padding: 0 1.5rem;
     }
-
-    .header-left {
-      max-width: 600px;
-
-      .section-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-        color: white;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 0.875rem;
-        font-weight: 600;
-        margin-bottom: 15px;
-
-        .badge-icon {
-          font-size: 18px;
-        }
-      }
-
-      .section-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 15px;
-        color: #1a202c;
-        line-height: 1.2;
-
-        .highlight {
-          background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        @media (max-width: 768px) {
-          font-size: 2rem;
-        }
-
-        @media (max-width: 480px) {
-          font-size: 1.8rem;
-        }
-      }
-
-      .section-description {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #4a5568;
-        margin: 0;
-
-        @media (max-width: 768px) {
-          font-size: 1rem;
-        }
-      }
+    @media (max-width: 480px) {
+      padding: 0 1rem;
     }
+  }
 
-    .view-all-btn {
+  .trending-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+
+    .badge-wrapper {
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 10px;
-      padding: 12px 28px;
-      background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      .trending-badge {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: $orange;
+        background: rgba(184, 115, 51, 0.1);
+        padding: 0.3rem 1rem;
+        border-radius: 40px;
+        font-weight: 500;
+      }
+      .product-count {
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+        color: #6b7280;
+        background: #f0efe8;
+        padding: 0.3rem 1rem;
+        border-radius: 40px;
+      }
+    }
+    .trending-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 500;
+      color: $dark;
+      margin: 0 0 1rem;
+      letter-spacing: -0.02em;
+      .highlight { color: $orange; font-weight: 600; }
+      @media (max-width: 768px) { font-size: 2.4rem; }
+      @media (max-width: 480px) { font-size: 2rem; }
+    }
+    .trending-subtitle {
       font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      white-space: nowrap;
-
+      line-height: 1.5;
+      color: $text-muted;
+      max-width: 580px;
+      margin: 0 auto 1.5rem;
+    }
+    .view-all-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: $orange;
+      text-decoration: none;
+      border-bottom: 1px solid $orange;
+      padding-bottom: 0.25rem;
+      transition: gap 0.2s;
+      .arrow-icon { font-size: 0.9rem; transition: transform 0.2s; }
       &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
-      }
-
-      .arrow-icon {
-        font-size: 20px;
-        transition: transform 0.3s ease;
-      }
-
-      &:hover .arrow-icon {
-        transform: translateX(5px);
-      }
-
-      @media (max-width: 768px) {
-        align-self: flex-start;
-      }
-
-      @media (max-width: 480px) {
-        width: 100%;
-        justify-content: center;
+        gap: 0.75rem;
+        .arrow-icon { transform: translateX(3px); }
       }
     }
   }
 
-  .products-grid {
+  // DESKTOP GRID (no arrows, buttons below card)
+  .desktop-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 2rem;
+    @media (max-width: 1200px) { grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+    @media (max-width: 992px) { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    @media (max-width: 768px) { display: none; }
+  }
 
-    @media (max-width: 1200px) {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+  .product-card {
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: translateY(-5px);
     }
+    .product-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: $white;
+        border: 1px solid $border-light;
+        border-radius: 40px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: $dark;
+        svg { font-size: 1rem; }
+        &.btn-cart.active,
+        &.btn-wishlist.active {
+          background: $orange;
+          border-color: $orange;
+          color: $white;
+        }
+        &:hover {
+          background: $orange;
+          border-color: $orange;
+          color: $white;
+        }
+      }
+    }
+  }
 
-    @media (max-width: 992px) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+  // MOBILE PURE SWIPE SLIDER (no arrows)
+  .mobile-slider-container {
+    display: none;
+    @media (max-width: 768px) {
+      display: block;
+      margin: 0 -1rem;
+      padding: 0 1rem;
     }
+    .slider-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 0.5rem 0 1.5rem;
+      scrollbar-width: none;
+      &::-webkit-scrollbar { display: none; }
+      .slide-item {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
+        @media (max-width: 560px) { flex: 0 0 50%; }
+        @media (min-width: 680px) { flex: 0 0 33.33%; }
+        .mobile-buttons {
+          display: flex;
+          gap: 10px;
+          margin-top: 12px;
+          button {
+            flex: 1;
+            background: $white;
+            border: 1px solid $border-light;
+            padding: 8px 0;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: $dark;
+            svg { font-size: 0.9rem; }
+            &.active {
+              background: $orange;
+              border-color: $orange;
+              color: $white;
+            }
+            &:hover {
+              background: $orange;
+              border-color: $orange;
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 0.5rem;
+      opacity: 0.6;
+      font-size: 0.7rem;
+      color: #6b7280;
+      .hint-dot {
+        width: 6px;
+        height: 6px;
+        background: $orange;
+        border-radius: 50%;
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0% { opacity: 0.4; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1.2); }
+      }
+    }
+  }
 
-    @media (max-width: 576px) {
-      grid-template-columns: 1fr;
-      gap: 20px;
+  .load-more-wrapper {
+    text-align: center;
+    margin-top: 3rem;
+    .load-more-btn {
+      background: transparent;
+      border: 1px solid $orange;
+      padding: 0.8rem 2.2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: $dark;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-radius: 40px;
+      &:hover {
+        background: $orange;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(184, 115, 51, 0.3);
+      }
+      @media (max-width: 480px) {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.8rem;
+      }
     }
+  }
+
+  // LOADING SKELETON
+  .trending-loading {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 2rem;
+    .loading-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      .skeleton-badge, .skeleton-title, .skeleton-subtitle {
+        background: #e4e4de;
+        border-radius: 20px;
+        margin: 0 auto 1rem;
+        animation: shimmer 1.2s infinite;
+      }
+      .skeleton-badge { width: 160px; height: 28px; }
+      .skeleton-title { width: 280px; height: 48px; border-radius: 12px; }
+      .skeleton-subtitle { width: 400px; height: 44px; border-radius: 12px; }
+    }
+    .loading-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      @media (max-width: 1200px) { grid-template-columns: repeat(3, 1fr); }
+      @media (max-width: 992px) { grid-template-columns: repeat(2, 1fr); }
+      @media (max-width: 768px) { grid-template-columns: 1fr; }
+      .card-skeleton {
+        background: #f5f5ef;
+        border-radius: 24px;
+        height: 420px;
+        width: 100%;
+        animation: shimmer 1.2s infinite;
+      }
+    }
+  }
+
+  .trending-error {
+    text-align: center;
+    padding: 5rem;
+    color: $orange;
+  }
+
+  @keyframes shimmer {
+    0% { background-color: #ece7df; }
+    50% { background-color: #f6f2ea; }
+    100% { background-color: #ece7df; }
   }
 }

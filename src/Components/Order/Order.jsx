@@ -25,7 +25,7 @@ const Orders = () => {
         setLoading(true);
 
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/orders/user/${user.id}`
+          `${import.meta.env.VITE_API_URL}/orders/user/${user.id}`,
         );
 
         console.log("Orders:", res.data);
@@ -100,20 +100,14 @@ const Orders = () => {
 
               <p>
                 <strong>Status</strong>
-                <span
-                  className={
-                    order.orderStatus === "COD" ? "cod" : "paid"
-                  }
-                >
+                <span className={order.orderStatus === "COD" ? "cod" : "paid"}>
                   {order.orderStatus}
                 </span>
               </p>
 
               <p>
                 <strong>Date</strong>
-                <span>
-                  {new Date(order.createdAt).toLocaleString()}
-                </span>
+                <span>{new Date(order.createdAt).toLocaleString()}</span>
               </p>
 
               <p>
@@ -133,10 +127,7 @@ const Orders = () => {
           <div className="products">
             {order.products?.map((item, idx) => {
               const productId =
-                item._id ||
-                item.productId ||
-                item.id ||
-                item.documentId;
+                item._id || item.productId || item.id || item.documentId;
 
               return (
                 <Link
@@ -150,11 +141,9 @@ const Orders = () => {
                 >
                   <div className="image-wrapper">
                     <img
-                      src={
-                        getImageUrl(item.img) ||
-                        getImageUrl(item.image)
-                      }
+                      src={getImageUrl(item.img) || getImageUrl(item.image)}
                       alt={item.title}
+                      loading="lazy"
                     />
 
                     <span
@@ -168,14 +157,12 @@ const Orders = () => {
 
                   <div className="product-details">
                     <h4>{item.title}</h4>
+                    {item.size && (
+                      <p className="product-size">Size: {item.size}</p>
+                    )}
+                    <p>Quantity: {item.quantity}</p>
 
-                    <p>
-                      Quantity: {item.quantity}
-                    </p>
-
-                    <p>
-                      ₹{item.price} each
-                    </p>
+                    <p>₹{item.price} each</p>
                   </div>
 
                   <span className="product-price">

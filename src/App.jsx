@@ -21,7 +21,7 @@ const PageLoader = () => (
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      height: "60vh",
+      height: "300vh",
       fontFamily: "'Josefin Sans', sans-serif",
       color: "#c9a96e",
       fontSize: "14px",

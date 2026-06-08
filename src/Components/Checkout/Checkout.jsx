@@ -63,7 +63,8 @@ const Checkout = () => {
       title: item.title,
       quantity: item.quantity,
       price: item.price,
-      img:item.img,
+      img: item.img,
+      size: item.size || null,
     }));
 
     const orderData = {
@@ -134,6 +135,7 @@ const Checkout = () => {
             quantity: item.quantity,
             price: item.price,
             img: item.img, // keep raw image
+             size: item.size || null,
           }));
 
           const orderData = {
@@ -207,7 +209,7 @@ const Checkout = () => {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <div className="item">
-                <img src={item.img} alt={item.title} />
+                <img src={item.img} alt={item.title} loading="lazy"/>
                 <div>
                   <h4>{item.title}</h4>
                   <p>

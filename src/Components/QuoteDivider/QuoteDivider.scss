@@ -1,0 +1,97 @@
+// QuoteDivider.scss – modern, animated, brand signature
+
+$gold: #c9a86a;
+$text-dark: #2c2b28;
+$text-light: #6b645c;
+$transition: 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+
+.quote-divider {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s $transition, transform 0.6s $transition;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .quote-line {
+    width: 0;
+    height: 2px;
+    background: $gold;
+    margin: 0 auto 1.5rem;
+    transition: width 0.6s $transition 0.2s;
+  }
+
+  &.visible .quote-line {
+    width: 60px;
+  }
+
+  .quote-text {
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-style: italic;
+    color: $text-dark;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.2px;
+
+    p {
+      margin: 0;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.5s $transition, transform 0.5s $transition;
+    }
+
+    p:first-child {
+      transition-delay: 0.15s;
+    }
+    p:last-child {
+      transition-delay: 0.3s;
+    }
+  }
+
+  &.visible .quote-text p {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .quote-brand {
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $text-light;
+    margin-top: 0.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s $transition 0.45s, transform 0.4s $transition 0.45s;
+
+    .underscore {
+      width: 30px;
+      height: 1px;
+      background: $gold;
+      margin: 6px auto 0;
+      transition: width 0.4s $transition 0.55s;
+    }
+  }
+
+  &.visible .quote-brand {
+    opacity: 1;
+    transform: translateY(0);
+    .underscore {
+      width: 30px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .quote-text {
+      font-size: 1rem;
+    }
+  }
+}

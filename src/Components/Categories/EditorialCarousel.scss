@@ -1,0 +1,344 @@
+// ===============================
+// 🌿 LUXURY EYE-STABLE COLOR SYSTEM
+// ===============================
+$bg-0: #0f1110;
+$bg-1: #151816;
+$bg-2: #1c1f1d;
+
+$ivory: #f6f1e8;
+$cream: #efe7db;
+
+$gold: #b89a6a;
+$gold-soft: rgba(184, 154, 106, 0.18);
+
+$text-main: #e8e2d8;
+$text-sub: #b8b2a8;
+$text-muted: #8f877d;
+
+$shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.45);
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+// ===============================
+// 🌌 SECTION WRAPPER
+// ===============================
+.editorial-carousel {
+  position: relative;
+  background: linear-gradient(180deg, $bg-0, $bg-1);
+  padding: 4rem 2rem;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+
+  animation: fadePage 1.2s $ease both;
+
+  @keyframes fadePage {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// subtle ambient glow
+.editorial-carousel::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 80%;
+  background: radial-gradient(
+    circle,
+    rgba(184, 154, 106, 0.06),
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  animation: glowPulse 8s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+// ===============================
+// 📦 INNER LAYOUT
+// ===============================
+.carousel-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  position: relative;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+// ===============================
+// 🖼 IMAGE SIDE (cinematic depth)
+// ===============================
+.carousel-image {
+  flex: 1.4;
+  perspective: 1200px;
+
+  .image-frame {
+    position: relative;
+    border-radius: 34px;
+    overflow: hidden;
+    box-shadow: $shadow;
+
+    transform: translateY(20px);
+    opacity: 0;
+    animation: imageReveal 1.2s $ease forwards;
+
+    @keyframes imageReveal {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+
+      transform: scale(1.05);
+      transition: transform 1.2s $ease, filter 0.8s $ease;
+      filter: saturate(0.95) contrast(1.05);
+    }
+
+    &:hover img {
+      transform: scale(1.08);
+      filter: saturate(1.1);
+    }
+
+    .image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 17, 16, 0.65),
+        rgba(15, 17, 16, 0.15)
+      );
+      transition: opacity 0.8s $ease;
+    }
+
+    &:hover .image-overlay {
+      opacity: 0.4;
+    }
+  }
+}
+
+// ===============================
+// ✍️ TEXT SIDE (stagger reveal)
+// ===============================
+.carousel-text {
+  flex: 1;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all 0.9s $ease;
+
+  &.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .text-content {
+    max-width: 480px;
+
+    @media (max-width: 900px) {
+      text-align: center;
+      margin: auto;
+    }
+  }
+
+  .editorial-label {
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: $gold;
+    margin-bottom: 1rem;
+
+    display: inline-block;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 40%;
+      height: 1px;
+      background: $gold-soft;
+      animation: lineGrow 1.5s $ease;
+    }
+
+    @keyframes lineGrow {
+      from { width: 0; }
+      to { width: 40%; }
+    }
+  }
+
+  .editorial-title {
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: $text-main;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+
+    animation: fadeUp 1s $ease both;
+  }
+
+  .editorial-subtitle {
+    color: $gold;
+    font-style: italic;
+    margin-bottom: 0.8rem;
+
+    animation: fadeUp 1.2s $ease both;
+  }
+
+  .editorial-description {
+    color: $text-sub;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+
+    animation: fadeUp 1.4s $ease both;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .editorial-cta {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    background: transparent;
+    border: none;
+    color: $text-main;
+    font-size: 0.85rem;
+    cursor: pointer;
+
+    position: relative;
+    transition: all 0.4s $ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background: $gold;
+      transition: width 0.4s $ease;
+    }
+
+    &:hover {
+      color: $gold;
+      transform: translateX(3px);
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}
+
+// ===============================
+// 🎛 NAVIGATION (soft floating)
+// ===============================
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.8rem;
+  margin-top: 2.5rem;
+
+  opacity: 0;
+  animation: navFade 1.6s $ease forwards;
+
+  @keyframes navFade {
+    to { opacity: 1; }
+  }
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid $gold-soft;
+    background: rgba(255, 255, 255, 0.04);
+    color: $text-main;
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 0.35s $ease;
+
+    &:hover {
+      background: $gold;
+      color: #111;
+      transform: scale(1.08);
+    }
+  }
+
+  .nav-dots {
+    display: flex;
+    gap: 10px;
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(184, 154, 106, 0.25);
+      transition: all 0.4s $ease;
+
+      &.active {
+        width: 24px;
+        border-radius: 6px;
+        background: $gold;
+      }
+
+      &:hover {
+        background: $gold;
+      }
+    }
+  }
+}
+
+// ===============================
+// 📱 MOBILE OPTIMIZATION
+// ===============================
+@media (max-width: 768px) {
+  .carousel-inner {
+    gap: 30px;
+  }
+
+  .editorial-title {
+    font-size: 1.7rem;
+  }
+
+  .carousel-image .image-frame img {
+    aspect-ratio: 4 / 3;
+  }
+}

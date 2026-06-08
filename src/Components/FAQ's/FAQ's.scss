@@ -1,0 +1,157 @@
+// =========================
+// 🌿 LUXURY COLOR SYSTEM
+// =========================
+$bg: #0f1110;
+$panel: #151816;
+$card: #1c1f1d;
+
+$gold: #b89a6a;
+$text: #e8e2d8;
+$muted: #a9a297;
+$soft: rgba(184, 154, 106, 0.2);
+
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+// =========================
+// 📦 SECTION
+// =========================
+.faq-section {
+  background: linear-gradient(180deg, $bg, $panel);
+  padding: 5rem 2rem;
+  color: $text;
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+}
+
+.faq-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+// =========================
+// 🏷 HEADER
+// =========================
+.faq-header {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  .faq-label {
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: $gold;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .faq-title {
+    font-size: 2.2rem;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .faq-subtitle {
+    font-size: 0.95rem;
+    color: $muted;
+  }
+}
+
+// =========================
+// 📜 FAQ LIST
+// =========================
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+// =========================
+// 🧩 FAQ ITEM
+// =========================
+.faq-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(184, 154, 106, 0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s $ease;
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    border-color: rgba(184, 154, 106, 0.3);
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    border-color: $gold;
+  }
+}
+
+// =========================
+// ❓ QUESTION
+// =========================
+.faq-question {
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: $text;
+
+  .icon {
+    font-size: 1.2rem;
+    color: $gold;
+    transition: transform 0.3s $ease;
+  }
+}
+
+// =========================
+// 💬 ANSWER (smooth expand)
+// =========================
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s $ease, padding 0.5s $ease;
+  background: rgba(0, 0, 0, 0.15);
+
+  p {
+    padding: 0 1.5rem;
+    color: $muted;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all 0.4s $ease;
+  }
+}
+
+// when active
+.faq-item.active {
+  .faq-answer {
+    max-height: 200px;
+    padding: 0.8rem 0 1.2rem;
+
+    p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .icon {
+    transform: rotate(180deg);
+  }
+}
+
+// =========================
+// 📱 MOBILE
+// =========================
+@media (max-width: 768px) {
+  .faq-title {
+    font-size: 1.7rem;
+  }
+
+  .faq-question {
+    font-size: 0.9rem;
+  }
+}

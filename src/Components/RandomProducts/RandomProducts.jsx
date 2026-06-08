@@ -54,10 +54,10 @@ const RandomProducts = ({ count = 4 }) => {
               <div className="rp-image">
                 {discount && <span className="badge">{discount}% OFF</span>}
 
-                <img src={img1} alt={product.title} className="main-img" />
+                <img src={img1} alt={product.title} className="main-img" loading="lazy"/>
 
                 {img2 && (
-                  <img src={img2} alt={product.title} className="hover-img" />
+                  <img src={img2} alt={product.title} className="hover-img" loading="lazy"/>
                 )}
 
               </div>
