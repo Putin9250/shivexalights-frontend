@@ -16,8 +16,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const TrendingProducts = () => {
   const dispatch = useDispatch();
   const { data, loading, error } = useFetch("/products?trending=true&limit=12");
-  const trendingProducts = data?.filter((item) => item.isTrending) || [];
-
+  // const trendingProducts = data?.filter((item) => item.isTrending) || [];
+const trendingProducts = data?.products?.filter((item) => item.isTrending) || [];
   const cartItems = useSelector((state) => state.cart.products);
   const wishlistItems = useSelector((state) => state.wishlist.products);
 

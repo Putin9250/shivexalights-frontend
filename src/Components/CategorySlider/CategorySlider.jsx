@@ -22,7 +22,8 @@ const CategorySlider = ({ category, title, description, randomize = false }) => 
   const { data, loading, error } = useFetch(`/products?category=${encodeURIComponent(category)}&limit=12`);
 
   // Extract & filter by category
-  const rawProducts = useMemo(() => (Array.isArray(data) ? data : data?.data || []), [data]);
+  // const rawProducts = useMemo(() => (Array.isArray(data) ? data : data?.data || []), [data]);
+  const rawProducts = useMemo(() => (Array.isArray(data?.products) ? data.products : []), [data]);
   const filteredProducts = useMemo(() => {
     if (!category) return rawProducts;
     return rawProducts.filter((product) =>

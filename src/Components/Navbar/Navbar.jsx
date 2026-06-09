@@ -145,7 +145,7 @@ const Navbar = () => {
               </div>
             </div>
             <Link to="/order" onClick={closeMobileMenu}>Orders</Link>
-            <Link to="/products/collection" onClick={closeMobileMenu}>Collection</Link>
+            <Link to="/products" onClick={closeMobileMenu}>Collection</Link>
             <Link to="/about" onClick={closeMobileMenu}>About</Link>
             <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
           </nav>
@@ -224,7 +224,7 @@ const Navbar = () => {
             <Link to="/order" onClick={closeMobileMenu}>Orders</Link>
             <Link to="/about" onClick={closeMobileMenu}>About</Link>
             <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
-            <Link to="/products/Collection" onClick={closeMobileMenu}>Collection</Link>
+            <Link to="/products" onClick={closeMobileMenu}>Collection</Link>
           </div>
           <div className="mobile-section">
             <h4>Account</h4>

@@ -22,7 +22,8 @@ const Product = () => {
   const { data, loading, error } = useFetch(`/products/${id}`);
   const wishlist = useSelector((state) => state.wishlist.products);
 
-  if (loading) return <div className="product-skeleton">Loading product...</div>;
+  if (loading)
+    return <div className="product-skeleton">Loading product...</div>;
   if (error) return <p>Error loading product.</p>;
   const product = data;
   if (!product) return <p>Product not found.</p>;
@@ -81,14 +82,16 @@ const Product = () => {
         img: getImageUrl(product.img),
         quantity,
         size: selectedSize ? selectedSize.name : null,
-      })
+      }),
     );
   };
 
   const handleThumbnailClick = (index) => {
     setSelectedImg(index);
     if (window.innerWidth <= 768) {
-      document.querySelector(".mainImg")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document
+        .querySelector(".mainImg")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
@@ -105,7 +108,9 @@ const Product = () => {
             {images.map((img, index) => (
               <div key={index} className="thumbnail-wrapper">
                 {/* Skeleton overlay – hidden after image loads */}
-                {!thumbnailsLoaded[index] && <div className="thumbnail-skeleton" />}
+                {!thumbnailsLoaded[index] && (
+                  <div className="thumbnail-skeleton" />
+                )}
                 <img
                   src={img}
                   alt=""
@@ -133,11 +138,16 @@ const Product = () => {
         <div className="right">
           <h1>{product.title}</h1>
           <div className="price">
-            {product.oldPrice && <span className="oldPrice">₹{product.oldPrice}</span>}
+            {product.oldPrice && (
+              <span className="oldPrice">₹{product.oldPrice}</span>
+            )}
             <span className="currentPrice">₹{currentPrice}/-</span>
             {product.oldPrice && (
               <span className="discount">
-                {Math.round(((product.oldPrice - currentPrice) / product.oldPrice) * 100)}% OFF
+                {Math.round(
+                  ((product.oldPrice - currentPrice) / product.oldPrice) * 100,
+                )}
+                % OFF
               </span>
             )}
           </div>
@@ -161,9 +171,21 @@ const Product = () => {
           )}
 
           <div className="quantity">
-            <button onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}>-</button>
+            <button
+              onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}
+            >
+              -
+            </button>
             <span>{quantity}</span>
-            <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
+            <button onClick={() => setQuantity((prev) => prev + 1)}>
+              +
+            </button>{" "}
+            {product.stock !== undefined && product.stock <= 5 && (
+              <div className="stock-warning">
+                ⚡ Only {product.stock} left in stock – order soon!
+              </div>
+            )}
+            {/* Here to Make this no from db */}
           </div>
 
           <div className="actions">
@@ -177,7 +199,7 @@ const Product = () => {
                     price: currentPrice,
                     img: getImageUrl(product.img),
                     size: selectedSize ? selectedSize.name : null,
-                  })
+                  }),
                 )
               }
             >

@@ -18,7 +18,8 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 const FeaturedProducts = () => {
   const dispatch = useDispatch();
   const { data, loading, error } = useFetch("/products?featured=true&limit=8");
-  const allProducts = data?.filter((item) => item.isFeatured) || [];
+  // const allProducts = data?.filter((item) => item.isFeatured) || [];
+  const allProducts = data?.products?.filter((item) => item.isFeatured) || [];
 
   const cartItems = useSelector((state) => state.cart.products);
   const wishlistItems = useSelector((state) => state.wishlist.products);

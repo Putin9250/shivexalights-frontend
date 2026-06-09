@@ -18,10 +18,11 @@ const Chandelier = () => {
   // Filter chandeliers (server already filters if API supports it)
   useEffect(() => {
     if (!data) return;
-    const filtered = data.filter((item) =>
+    
+    const filtered = (data?.products || []).filter((item) =>
       (item.categories || [])
         .map((c) => c.toLowerCase().trim())
-        .includes("chandelier")
+        .includes("chandelier"),
     );
     setChandeliers(filtered.slice(0, MAX_ITEMS));
   }, [data]);
@@ -48,11 +49,11 @@ const Chandelier = () => {
 
   const nextPage = useCallback(
     () => setCurrentPage((p) => (p + 1) % totalPages),
-    [totalPages]
+    [totalPages],
   );
   const prevPage = useCallback(
     () => setCurrentPage((p) => (p - 1 + totalPages) % totalPages),
-    [totalPages]
+    [totalPages],
   );
 
   useEffect(() => {
@@ -91,7 +92,9 @@ const Chandelier = () => {
             <span className="ch-eyebrow__line ch-eyebrow__line--flip" />
           </div>
           <h2 className="ch-heading">Italian Chandeliers</h2>
-          <p className="ch-sub">Where glass meets emotion, and light becomes sculpture</p>
+          <p className="ch-sub">
+            Where glass meets emotion, and light becomes sculpture
+          </p>
         </header>
 
         <div
@@ -124,9 +127,13 @@ const Chandelier = () => {
                     <span className="ch-card__tag">Chandelier</span>
                     <h3 className="ch-card__name">{item.title}</h3>
                     <div className="ch-card__price-row">
-                      <span className="ch-card__price">₹ {fmt(item.price)}</span>
+                      <span className="ch-card__price">
+                        ₹ {fmt(item.price)}
+                      </span>
                       {item.oldPrice && (
-                        <del className="ch-card__old">₹ {fmt(item.oldPrice)}</del>
+                        <del className="ch-card__old">
+                          ₹ {fmt(item.oldPrice)}
+                        </del>
                       )}
                     </div>
                   </div>
@@ -135,13 +142,31 @@ const Chandelier = () => {
             </div>
           </div>
 
-          <button className="ch-arrow ch-arrow--prev" onClick={prevPage} aria-label="Previous">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <button
+            className="ch-arrow ch-arrow--prev"
+            onClick={prevPage}
+            aria-label="Previous"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </button>
-          <button className="ch-arrow ch-arrow--next" onClick={nextPage} aria-label="Next">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <button
+            className="ch-arrow ch-arrow--next"
+            onClick={nextPage}
+            aria-label="Next"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
