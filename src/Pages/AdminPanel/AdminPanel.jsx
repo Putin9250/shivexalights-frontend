@@ -3,15 +3,56 @@ import axios from "axios";
 import "./AdminPanel.scss";
 
 const AdminPanel = () => {
+  // ─────────────────────────────────────────────────────────────────
+  // ALL HOOKS – called unconditionally on every render
+  // ─────────────────────────────────────────────────────────────────
+  // Password state
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  
+  const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+  
+  // Dashboard state
   const [activeTab, setActiveTab] = useState("orders");
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
+  const [newProduct, setNewProduct] = useState({
+    title: "",
+    description: "",
+    price: "",
+    oldPrice: "",
+    img: "",
+    img2: "",
+    img3: "",
+    img4: "",
+    categories: "",
+    isNew: false,
+    isFeatured: false,
+    isTrending: false,
+    stock: "",
+    sizes: "",
+  });
 
   // ─────────────────────────────────────────────────────────────────
-  // ORDERS
+  // HANDLERS (password)
+  // ─────────────────────────────────────────────────────────────────
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    if (password === correctPassword) {
+      setIsAuthorized(true);
+      setPasswordError(false);
+    } else {
+      setPasswordError(true);
+      setPassword("");
+    }
+  };
+
+  // ─────────────────────────────────────────────────────────────────
+  // ORDERS FUNCTIONS
   // ─────────────────────────────────────────────────────────────────
   const fetchOrders = async () => {
     setLoading(true);
@@ -49,7 +90,7 @@ const AdminPanel = () => {
   };
 
   // ─────────────────────────────────────────────────────────────────
-  // PRODUCTS
+  // PRODUCTS FUNCTIONS
   // ─────────────────────────────────────────────────────────────────
   const fetchProducts = async () => {
     setLoading(true);
@@ -79,23 +120,6 @@ const AdminPanel = () => {
   // ─────────────────────────────────────────────────────────────────
   // ADD PRODUCT
   // ─────────────────────────────────────────────────────────────────
-  const [newProduct, setNewProduct] = useState({
-    title: "",
-    description: "",
-    price: "",
-    oldPrice: "",
-    img: "",
-    img2: "",
-    img3: "",
-    img4: "",
-    categories: "",
-    isNew: false,
-    isFeatured: false,
-    isTrending: false,
-    stock: "",
-    sizes: "",
-  });
-
   const handleAddProduct = async (e) => {
     e.preventDefault();
     if (!newProduct.title || !newProduct.price) {
@@ -137,12 +161,44 @@ const AdminPanel = () => {
     }
   };
 
-  // Load data when tab changes
+  // ─────────────────────────────────────────────────────────────────
+  // EFFECTS
+  // ─────────────────────────────────────────────────────────────────
   useEffect(() => {
     if (activeTab === "orders") fetchOrders();
     if (activeTab === "products") fetchProducts();
   }, [activeTab]);
 
+  // ─────────────────────────────────────────────────────────────────
+  // RENDER (conditional)
+  // ─────────────────────────────────────────────────────────────────
+  if (!isAuthorized) {
+    return (
+      <div className="admin-password-container">
+        <div className="admin-password-card">
+          <h2>Admin Access</h2>
+          <p>Please enter the admin password to continue.</p>
+          <form onSubmit={handlePasswordSubmit}>
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoFocus
+            />
+            <button type="submit">Unlock</button>
+            {passwordError && (
+              <p className="error-message">Incorrect password. Try again.</p>
+            )}
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // DASHBOARD RENDER (same as before)
+  // ─────────────────────────────────────────────────────────────────
   const filteredProducts = products.filter((p) =>
     p.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p._id?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -181,7 +237,7 @@ const AdminPanel = () => {
         </button>
       </div>
 
-      {/* ========== ORDERS SECTION ========== */}
+      {/* ORDERS TAB */}
       {activeTab === "orders" && (
         <div className="orders-section">
           {loading && <p>Loading orders...</p>}
@@ -219,7 +275,7 @@ const AdminPanel = () => {
         </div>
       )}
 
-      {/* ========== PRODUCTS SECTION ========== */}
+      {/* PRODUCTS TAB */}
       {activeTab === "products" && (
         <div className="products-section">
           <div className="search-bar">
@@ -277,7 +333,7 @@ const AdminPanel = () => {
         </div>
       )}
 
-      {/* ========== ADD PRODUCT SECTION ========== */}
+      {/* ADD PRODUCT TAB */}
       {activeTab === "add" && (
         <div className="add-product-section">
           <form onSubmit={handleAddProduct}>
