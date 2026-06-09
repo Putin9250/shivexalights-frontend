@@ -202,6 +202,7 @@ const Chandelier = () => {
           </Link>
         </div>
       </div>
+      
     </section>
   );
 };

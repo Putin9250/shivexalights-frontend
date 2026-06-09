@@ -50,7 +50,6 @@ const Products = () => {
           p.categories?.forEach(c => cats.add(c))
         );
         setAllCategories(Array.from(cats));
-        
       })
       .catch(() => {});
   }, []);
@@ -72,9 +71,6 @@ const Products = () => {
         params.set("page", 1);
 
         const res  = await makeRequest.get(`/products?${params.toString()}`);
-console.log("URL called:", `/products?${params.toString()}`);
-console.log("Response:", res.data);
-if (cancelled) return;
         if (cancelled) return;
 
         const data = res.data;
@@ -387,4 +383,4 @@ if (cancelled) return;
   );
 };
 
-export default Products;
+export default Products; 

@@ -40,12 +40,17 @@ const Navbar = () => {
   const closeMobileMenu = () => setIsMenuOpen(false);
 
   const handleSearchClick = () => {
-    if (window.innerWidth <= 768) {
-      setSearchPanelOpen(true);
-    } else {
-      setSearchActive(!searchActive);
-    }
-  };
+  // If mobile menu is open, close it first
+  if (isMenuOpen) {
+    setIsMenuOpen(false);
+  }
+
+  if (window.innerWidth <= 768) {
+    setSearchPanelOpen(true);
+  } else {
+    setSearchActive(!searchActive);
+  }
+};
 
   const shopCategories = [
     { name: "Ceiling Lights", path: "/products?category=ceiling" },
@@ -78,7 +83,14 @@ const Navbar = () => {
     }, 4000);
     return () => clearInterval(interval);
   }, [taglines.length]);
-
+// Add this after your existing useEffect hooks
+useEffect(() => {
+  const handleCloseMobileMenu = () => {
+    setIsMenuOpen(false);
+  };
+  window.addEventListener("closeMobileMenu", handleCloseMobileMenu);
+  return () => window.removeEventListener("closeMobileMenu", handleCloseMobileMenu);
+}, []);
   return (
     <>
       {/* ===== Top Bar ===== */}

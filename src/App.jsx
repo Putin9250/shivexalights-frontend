@@ -3,6 +3,8 @@ import { createHashRouter, RouterProvider, Outlet } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import ScrollToTop from "./Hooks/useScrollToTop";
+import AdminPanel from "./Pages/AdminPanel/AdminPanel";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import "./App.scss";
 
 // ── Lazy‑load all pages ──────────────────────────────────────────────────
@@ -84,6 +86,14 @@ const router = createHashRouter([
       {
         path: "order",
         element: <Orders />,
+      },
+      {
+        path: "admin",
+        element: (
+          // <ProtectedRoute adminOnly={true}>
+            <AdminPanel />
+          // </ProtectedRoute>
+        ),
       },
     ],
   },
