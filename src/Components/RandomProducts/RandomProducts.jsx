@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import "./RandomProducts.scss";
 
-const RandomProducts = ({ count = 4 }) => {
+const fallbackImage =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='16' fill='%23999'%3ENo Image%3C/text%3E%3C/svg%3E";
+
+const RandomProducts = ({ count = 8, currentProductId }) => {
   const { data, loading, error } = useFetch("/products");
-
   const [randomItems, setRandomItems] = useState([]);
-
   const baseUrl = import.meta.env.VITE_API_UPLOAD_URL || "";
 
   const getImageUrl = (img) => {
@@ -18,14 +19,23 @@ const RandomProducts = ({ count = 4 }) => {
   };
 
   useEffect(() => {
-    if (data && data.length > 0) {
-      const shuffled = [...data].sort(() => 0.5 - Math.random());
+    // data is { products: [...], total, page, totalPages, hasMore }
+    const products = data?.products;
+    if (products && products.length > 0) {
+      // 1. remove current product (if ID provided)
+      const filtered = currentProductId
+        ? products.filter((item) => item._id !== currentProductId)
+        : products;
+
+      // 2. shuffle and take first 'count' items
+      const shuffled = [...filtered].sort(() => Math.random() - 0.5);
       setRandomItems(shuffled.slice(0, count));
     }
-  }, [data, count]);
+  }, [data, count, currentProductId]);
 
   if (loading) return <p className="rec-loading">Loading recommendations...</p>;
-  if (error) return null;
+  if (error) return null; // silent fail
+  if (!randomItems.length) return null;
 
   return (
     <div className="random-products">
@@ -38,12 +48,9 @@ const RandomProducts = ({ count = 4 }) => {
         {randomItems.map((product) => {
           const img1 = getImageUrl(product.img);
           const img2 = getImageUrl(product.img2);
-
-          const discount =
-            product.oldPrice &&
-            Math.round(
-              ((product.oldPrice - product.price) / product.oldPrice) * 100,
-            );
+          const discount = product.oldPrice
+            ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
+            : null;
 
           return (
             <Link
@@ -53,24 +60,31 @@ const RandomProducts = ({ count = 4 }) => {
             >
               <div className="rp-image">
                 {discount && <span className="badge">{discount}% OFF</span>}
-
-                <img src={img1} alt={product.title} className="main-img" loading="lazy"/>
-
+                <img
+                  src={img1 || fallbackImage}
+                  alt={product.title}
+                  className="main-img"
+                  loading="lazy"
+                  onError={(e) => (e.target.src = fallbackImage)}
+                />
                 {img2 && (
-                  <img src={img2} alt={product.title} className="hover-img" loading="lazy"/>
+                  <img
+                    src={img2}
+                    alt={product.title}
+                    className="hover-img"
+                    loading="lazy"
+                    onError={(e) => (e.target.style.display = "none")}
+                  />
                 )}
-
               </div>
 
               <div className="rp-info">
                 <h3>{product.title}</h3>
-
                 <div className="price">
-                  {product.OldPrice && (
-                    <span className="old">${product.OldPrice}</span>
+                  {product.oldPrice && (
+                    <span className="old">₹ {product.oldPrice}</span>
                   )}
-
-                  <span className="current">${product.price}</span>
+                  <span className="current">₹ {product.price}</span>
                 </div>
               </div>
             </Link>

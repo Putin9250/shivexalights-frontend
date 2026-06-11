@@ -220,7 +220,7 @@ const Product = () => {
           </div>
         </div>
       </div>
-      <RandomProducts count={4} />
+      <RandomProducts count={8} />
     </>
   );
 };
