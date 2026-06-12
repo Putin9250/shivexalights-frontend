@@ -4,6 +4,7 @@ import Slider from "../../Components/Slider/Slider";
 import Chandelier from "../../Components/Chandelier/Chandelier";
 import Consultation from "../../Components/Consultation/Consultation";
 import CategorySlider from "../../Components/CategorySlider/CategorySlider";
+import BrandStory from "../../Components/BrandStory/BrandStory";
 import QuoteDivider from "../../Components/QuoteDivider/QuoteDivider";
 import FAQ from "../../Components/FAQ's/FAQ's";
 import LocateUs from "../../Components/Locate Us/LocateUs";
@@ -47,6 +48,7 @@ const Home = () => {
             description="Two‑tier elegance for modern interiors. Adjustable height, timeless design."
             randomize={true}
           />
+          <BrandStory />
           <CategorySlider
             category="LED Mirror Lights" // use EXACT category string as stored
             title="LED Mirror Lights"
