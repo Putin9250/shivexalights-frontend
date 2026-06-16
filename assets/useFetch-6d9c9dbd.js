@@ -1,0 +1,1 @@
+import{r as t,m as f}from"./index-dd05d82a.js";const i=e=>{const[r,c]=t.useState([]),[o,a]=t.useState(!1),[n,u]=t.useState(!1);return t.useEffect(()=>{(async()=>{try{a(!0);const s=await f.get(e);c(s.data||[])}catch{u(!0)}a(!1)})()},[e]),{data:r,loading:o,error:n}};export{i as u};

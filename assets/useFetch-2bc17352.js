@@ -1,1 +1,0 @@
-import{r as t}from"./index-a904d4ee.js";import{m as u}from"./makeRequest-81a73361.js";const h=e=>{const[r,o]=t.useState([]),[c,a]=t.useState(!1),[n,f]=t.useState(!1);return t.useEffect(()=>{(async()=>{try{a(!0);const s=await u.get(e);o(s.data||[])}catch{f(!0)}a(!1)})()},[e]),{data:r,loading:c,error:n}};export{h as u};
