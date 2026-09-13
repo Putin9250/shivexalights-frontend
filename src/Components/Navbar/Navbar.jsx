@@ -12,16 +12,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Cart from "../Cart/Cart";
 import Wishlist from "../Wishlist/Wishlist";
+import Search from "../Search/Search";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
-  const [searchActive, setSearchActive] = useState(false);
+  const [openSearch, setOpenSearch] = useState(false);
   const [shopDropdown, setShopDropdown] = useState(false);
   const [taglineVisible, setTaglineVisible] = useState(true);
-  const [searchPanelOpen, setSearchPanelOpen] = useState(false);
 
   const { openSignIn } = useClerk();
   const { user, isSignedIn } = useUser();
@@ -40,26 +40,18 @@ const Navbar = () => {
   const closeMobileMenu = () => setIsMenuOpen(false);
 
   const handleSearchClick = () => {
-  // If mobile menu is open, close it first
-  if (isMenuOpen) {
-    setIsMenuOpen(false);
-  }
-
-  if (window.innerWidth <= 768) {
-    setSearchPanelOpen(true);
-  } else {
-    setSearchActive(!searchActive);
-  }
-};
+    if (isMenuOpen) setIsMenuOpen(false);
+    setOpenSearch(true);
+  };
 
   const shopCategories = [
-    { name: "Ceiling Lights", path: "/products?category=ceiling" },
-    { name: "Hanging Lights", path: "/products?category=hanging" },
-    { name: "Floor Lamps", path: "/products?category=floor" },
-    { name: "Outdoor Lighting", path: "/products?category=outdoor" },
-    { name: "Humanoid Sculptures", path: "/products?category=sculpture" },
-    { name: "Office & Gym", path: "/products?category=office-gym" },
-    { name: "Italian Chandeliers", path: "/products?category=chandelier" },
+    { name: "Chandeliers", path: "/products?categories=chandelier" },
+    { name: "Hanging Lights", path: "/products?categories=Hanging%20Light" },
+    { name: "Ceiling Lights", path: "/products?categories=Ceiling%20Light" },
+    { name: "Mirror Lights", path: "/products?categories=LED%20Mirror%20Lights" },
+    { name: "Wall Lights", path: "/products?categories=Wall%20Light" },
+    { name: "Floor Lamps", path: "/products?categories=Floor%20Lamp" },
+    { name: "Outdoor Lighting", path: "/products?categories=Outdoor%20Lighting" },
   ];
 
   // ===== Tagline Carousel =====
@@ -163,20 +155,9 @@ useEffect(() => {
           </nav>
 
           <div className="nav-actions">
-            <div className={`search-box ${searchActive ? "active" : ""}`}>
-              <input
-                type="text"
-                placeholder="Find your glow..."
-                className="search-input"
-                onBlur={() => setSearchActive(false)}
-              />
-              <button
-                className="search-icon"
-                onClick={handleSearchClick}
-              >
-                <SearchIcon />
-              </button>
-            </div>
+            <button className="icon-btn" onClick={handleSearchClick} aria-label="Search">
+              <SearchIcon />
+            </button>
 
             <button
               className="icon-btn hide-mobile"
@@ -262,29 +243,9 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* ===== Search Panel ===== */}
-      {searchPanelOpen && (
-        <div className="mobile-overlay" onClick={() => setSearchPanelOpen(false)}></div>
-      )}
-      <div className={`search-panel ${searchPanelOpen ? "open" : ""}`}>
-        <div className="search-panel-header">
-          <h3>Search</h3>
-          <button className="close-btn" onClick={() => setSearchPanelOpen(false)}>
-            <CloseIcon />
-          </button>
-        </div>
-        <div className="search-panel-body">
-          <input
-            type="text"
-            placeholder="Find your glow..."
-            className="search-panel-input"
-            autoFocus
-          />
-        </div>
-      </div>
-
       {openCart && <Cart onClose={() => setOpenCart(false)} />}
       {openWishlist && <Wishlist onClose={() => setOpenWishlist(false)} />}
+      {openSearch && <Search onClose={() => setOpenSearch(false)} />}
     </>
   );
 };

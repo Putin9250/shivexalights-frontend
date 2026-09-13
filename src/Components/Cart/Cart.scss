@@ -153,16 +153,71 @@
           margin-bottom: 0.25rem;
 
           &:hover {
-            color: #2879fe;
+            color: #c9a86a;
           }
+        }
+
+        .item-size {
+          font-size: 0.78rem;
+          color: #94a3b8;
+          margin: 0 0 2px;
+          font-style: italic;
         }
 
         .item-price {
           font-size: 0.85rem;
           color: #64748b;
-          margin: 0;
+          margin: 0 0 8px;
+        }
+
+        .qty-stepper {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: #f8fafc;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: #1e293b;
+            padding: 0;
+
+            &:hover:not(:disabled) {
+              border-color: #c9a86a;
+              background: rgba(201, 168, 106, 0.1);
+              color: #c9a86a;
+            }
+
+            &:disabled {
+              opacity: 0.35;
+              cursor: not-allowed;
+            }
+          }
+
+          .qty-val {
+            min-width: 22px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1e293b;
+          }
+        }
+
+        .stock-warn {
+          font-size: 0.75rem;
+          color: #f59e0b;
+          margin: 4px 0 0;
         }
       }
+
 
       .item-total {
         font-weight: 600;
@@ -204,26 +259,26 @@
         color: #1e293b;
 
         span:last-child {
-          color: #2879fe;
+          color: #c9a86a;
         }
       }
     }
 
     .checkout-btn {
       width: 100%;
-      background: #2879fe;
-      color: white;
+      background: #c9a86a;
+      color: #111827;
       border: none;
       padding: 0.85rem;
       border-radius: 12px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
       transition: background 0.2s;
       margin-top: 0.5rem;
 
       &:hover {
-        background: #1a5fd8;
+        background: #b89759;
       }
     }
 

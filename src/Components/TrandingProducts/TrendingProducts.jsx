@@ -127,7 +127,7 @@ const trendingProducts = data?.products?.filter((item) => item.isTrending) || []
             customer favorites across our collections.
           </p>
           <div className="header-actions">
-            <Link to="/products/trending" className="view-all-link">
+            <Link to="/products?categories=trending" className="view-all-link">
               Explore All Trending
               <ArrowForwardIosIcon className="arrow-icon" />
             </Link>

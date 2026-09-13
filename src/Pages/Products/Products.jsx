@@ -41,6 +41,14 @@ const Products = () => {
   // keep page in a ref so loadMore can read it without stale closure
   const pageRef = useRef(1);
 
+  // Apply filter links from the navbar/footer whenever their URL changes.
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    setSelectedCategories(params.get("categories")?.split(",").filter(Boolean) || []);
+    setPriceRange({ min: parseInt(params.get("minPrice")) || 0, max: parseInt(params.get("maxPrice")) || 500000 });
+    setSortOption(params.get("sort") || "");
+  }, [location.search]);
+
   // ── fetch sidebar categories once ─────────────────────────────────────────
   useEffect(() => {
     makeRequest.get("/products?limit=100")
@@ -309,7 +317,7 @@ const Products = () => {
       {/* ── Mobile Bottom Sheet ── */}
       {showMobileFilter && (
         <>
-          <div className="mobile-overlay" onClick={() => setShowMobileFilter(false)} />
+          <div className="filter-overlay" onClick={() => setShowMobileFilter(false)} />
           <div className="mobile-filter-sheet">
             <div className="sheet-header">
               <h3>Filter & Sort</h3>
@@ -383,4 +391,4 @@ const Products = () => {
   );
 };
 
-export default Products; 
+export default Products;

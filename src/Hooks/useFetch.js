@@ -1,29 +1,64 @@
 import { useEffect, useState } from "react";
 import makeRequest from "../makeRequest";
 
+const CACHE_PREFIX = "shivexa_cache_";
+
 const useFetch = (url) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const cacheKey = CACHE_PREFIX + url;
+
+  // Try reading initial data from session storage for instant render
+  const getInitialData = () => {
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) return JSON.parse(cached);
+    } catch (e) {
+      // Ignore cache errors
+    }
+    return null;
+  };
+
+  const initialData = getInitialData();
+  const [data, setData] = useState(initialData);
+  const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchData = async () => {
       try {
-        setLoading(true);
+        // If we didn't have cached data, set loading state
+        if (!sessionStorage.getItem(cacheKey)) {
+          setLoading(true);
+        }
 
         const res = await makeRequest.get(url);
+        const result = res.data ?? null;
 
-        setData(res.data || []); // ✅ fixed
-
+        if (isMounted) {
+          setData(result);
+          setError(false);
+          try {
+            sessionStorage.setItem(cacheKey, JSON.stringify(result));
+          } catch (e) {}
+        }
       } catch (err) {
-        setError(true);
+        if (isMounted) {
+          setError(true);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-
-      setLoading(false);
     };
 
     fetchData();
-  }, [url]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [url, cacheKey]);
 
   return { data, loading, error };
 };

@@ -17,7 +17,7 @@ const Slider = () => {
       title: "Art of Illumination",
       subtitle: "Discover chandeliers that sculpt space and light.",
       ctaText: "Explore Collection",
-      link: "/products/collection"
+      link: "/products"
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ const Slider = () => {
       title: "Elegance in Every Glow",
       subtitle: "Handcrafted Italian designs for timeless interiors.",
       ctaText: "Shop Chandeliers",
-      link: "/products/21"
+      link: "/products?categories=chandelier"
     },
     {
       id: 3,
@@ -33,7 +33,7 @@ const Slider = () => {
       title: "Sculpting Ambiance",
       subtitle: "Where lighting becomes art.",
       ctaText: "View Gallery",
-      link: "/products/21"
+      link: "/products"
     }
   ];
 

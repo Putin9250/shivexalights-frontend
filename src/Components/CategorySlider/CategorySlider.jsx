@@ -168,7 +168,7 @@ const CategorySlider = ({ category, title, description, randomize = false }) => 
             <h2>{title}</h2>
             <p>{description}</p>
           </div>
-          <Link to={`/products?category=${encodeURIComponent(category)}`} className="view-all-link">
+          <Link to={`/products?categories=${encodeURIComponent(category)}`} className="view-all-link">
             View all →
           </Link>
         </div>

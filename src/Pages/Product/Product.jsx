@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Product.scss";
 import { useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
@@ -22,10 +22,52 @@ const Product = () => {
   const { data, loading, error } = useFetch(`/products/${id}`);
   const wishlist = useSelector((state) => state.wishlist.products);
 
+  const product = data;
+  const sizes = Array.isArray(product?.sizes)
+    ? product.sizes.filter((size) => size?.name && Number.isFinite(Number(size.price)))
+    : [];
+  const hasSizes = sizes.length > 0;
+
+  useEffect(() => {
+    setSelectedImg(0);
+    setQuantity(1);
+    setMainImageLoaded(false);
+    setThumbnailsLoaded({});
+    const firstAvailableSize = sizes.find((size) => {
+      const sizeStock = Number.isFinite(Number(size.stock)) ? Number(size.stock) : Number(product?.stock ?? 0);
+      return sizeStock > 0;
+    });
+    setSelectedSize(firstAvailableSize || sizes[0] || null);
+  }, [id, product?._id, product?.updatedAt]);
+
+  useEffect(() => {
+    if (!product) return undefined;
+    document.title = `${product.title} | ShivExa Lights`;
+    const schemaId = "shivexa-product-schema";
+    document.getElementById(schemaId)?.remove();
+    const script = document.createElement("script");
+    script.id = schemaId;
+    script.type = "application/ld+json";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: product.title,
+      description: product.description || undefined,
+      image: [product.img, product.img2, product.img3, product.img4].filter(Boolean).map((image) => typeof image === "string" ? image : image.url),
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "INR",
+        price: selectedSize?.price || product.price,
+        availability: Number(product.stock ?? 0) > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      },
+    });
+    document.head.appendChild(script);
+    return () => script.remove();
+  }, [product, selectedSize]);
+
   if (loading)
     return <div className="product-skeleton">Loading product...</div>;
   if (error) return <p>Error loading product.</p>;
-  const product = data;
   if (!product) return <p>Product not found.</p>;
 
   const isInWishlist = wishlist.some((item) => item._id === product._id);
@@ -68,9 +110,24 @@ const Product = () => {
   };
 
   const currentPrice = selectedSize ? selectedSize.price : product.price;
+  const variantStock = selectedSize?.stock;
+  const stockLimit = Number.isFinite(Number(variantStock))
+    ? Number(variantStock)
+    : Number(product.stock ?? 0);
+  const isOutOfStock = stockLimit === 0;
+
+  const selectSize = (size) => {
+    setSelectedSize(size);
+    const nextStock = Number.isFinite(Number(size.stock)) ? Number(size.stock) : Number(product.stock ?? 0);
+    setQuantity((previous) => Math.max(1, Math.min(previous, nextStock || 1)));
+  };
 
   const handleAddToCart = () => {
-    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+    if (isOutOfStock) {
+      alert("Sorry, this product is out of stock.");
+      return;
+    }
+    if (hasSizes && !selectedSize) {
       alert("Please select a size");
       return;
     }
@@ -82,6 +139,7 @@ const Product = () => {
         img: getImageUrl(product.img),
         quantity,
         size: selectedSize ? selectedSize.name : null,
+        stock: stockLimit,
       }),
     );
   };
@@ -153,39 +211,59 @@ const Product = () => {
           </div>
           <p>{product.description}</p>
 
-          {product.sizes && product.sizes.length > 0 && (
+          {hasSizes && (
             <div className="size-selector">
-              <span className="size-label">Select Size:</span>
+              <span className="size-label">Select Size: <strong>{selectedSize?.name}</strong></span>
               <div className="size-options">
-                {product.sizes.map((size, idx) => (
+                {sizes.map((size, idx) => {
+                  const sizeStock = Number.isFinite(Number(size.stock)) ? Number(size.stock) : Number(product.stock ?? 0);
+                  const unavailable = sizeStock === 0;
+                  return (
                   <button
                     key={idx}
-                    className={`size-btn ${selectedSize?.name === size.name ? "active" : ""}`}
-                    onClick={() => setSelectedSize(size)}
+                    type="button"
+                    disabled={unavailable}
+                    className={`size-btn ${selectedSize?.name === size.name ? "active" : ""} ${unavailable ? "unavailable" : ""}`}
+                    onClick={() => selectSize(size)}
                   >
-                    {size.name}
+                    <span>{size.name}</span><small>₹{Number(size.price).toLocaleString("en-IN")}</small>
                   </button>
-                ))}
+                  );
+                })}
               </div>
+              {selectedSize && <p className={`variant-stock ${isOutOfStock ? "out" : ""}`}>{isOutOfStock ? `${selectedSize.name} is out of stock` : `${stockLimit} available in ${selectedSize.name}`}</p>}
             </div>
           )}
 
           <div className="quantity">
             <button
               onClick={() => setQuantity((prev) => (prev === 1 ? 1 : prev - 1))}
+              disabled={isOutOfStock}
             >
               -
             </button>
             <span>{quantity}</span>
-            <button onClick={() => setQuantity((prev) => prev + 1)}>
+            <button
+              onClick={() => setQuantity((prev) => (stockLimit > 0 ? Math.min(prev + 1, stockLimit) : prev))}
+              disabled={isOutOfStock || quantity >= stockLimit}
+            >
               +
-            </button>{" "}
-            {product.stock !== undefined && product.stock <= 5 && (
-              <div className="stock-warning">
-                ⚡ Only {product.stock} left in stock – order soon!
+            </button>
+            {isOutOfStock && (
+              <div className="stock-warning out">
+                ❌ Out of Stock
               </div>
             )}
-            {/* Here to Make this no from db */}
+            {!isOutOfStock && stockLimit > 0 && stockLimit <= 5 && (
+              <div className="stock-warning">
+                ⚡ Only {stockLimit} left – order soon!
+              </div>
+            )}
+            {!isOutOfStock && quantity >= stockLimit && stockLimit > 0 && (
+              <div className="stock-warning">
+                ℹ️ Max quantity reached ({stockLimit} in stock)
+              </div>
+            )}
           </div>
 
           <div className="actions">
@@ -205,8 +283,8 @@ const Product = () => {
             >
               <FavoriteBorderIcon />
             </button>
-            <button className="add" onClick={handleAddToCart}>
-              <ShoppingCartCheckoutIcon /> Add to Cart
+            <button className={`add ${isOutOfStock ? "disabled" : ""}`} onClick={handleAddToCart} disabled={isOutOfStock}>
+              <ShoppingCartCheckoutIcon /> {isOutOfStock ? "Out of Stock" : "Add to Cart"}
             </button>
             <button className="shareBtn" onClick={handleShare} title="Share">
               <ShareIcon />
@@ -220,7 +298,7 @@ const Product = () => {
           </div>
         </div>
       </div>
-      <RandomProducts count={8} />
+      <RandomProducts count={8} currentProductId={product._id} selectedProducts={product.recommendedProducts} />
     </>
   );
 };

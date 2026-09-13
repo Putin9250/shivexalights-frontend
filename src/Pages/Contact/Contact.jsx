@@ -1,3 +1,4 @@
+import React from "react";
 import "./Contact.scss";
 
 import { motion } from "framer-motion";
@@ -28,7 +29,7 @@ const Contact = () => {
         "service_xj74ggc",
         "template_pvfbomn",
         form.current,
-        "p6OR3xZ0afJ3-rpu1"
+        "Ioi-T0lXKdLP_Aczh"
       )
       .then(
         () => {
@@ -91,25 +92,23 @@ const Contact = () => {
           variants={staggerVariants}
         >
           <motion.span className="subtitle" variants={fadeInUpVariants}>
-            CONTACT US
+            GET IN TOUCH
           </motion.span>
 
           <motion.h1 variants={fadeInUpVariants}>
-            Let's Build Something
-            <span> Extraordinary</span>
+            Illuminating Your
+            <span> Space</span>
           </motion.h1>
 
           <motion.p variants={fadeInUpVariants}>
-            Have a project in mind? Need a modern website,
-            ecommerce platform, portfolio, landing page,
-            business solution or web application?
-            Uttam Web Solution is ready to help.
+            Have an inquiry about our chandeliers, architectural lighting, or custom orders?
+            ShivExa Lights is dedicated to bringing timeless brilliance and modern elegance to your home or workspace.
           </motion.p>
 
           <motion.div className="info" variants={fadeInUpVariants}>
             <div className="item">
               <FaEnvelope />
-              <span>uttamwebsolution@gmail.com</span>
+              <span>support@shivexalights.com</span>
             </div>
 
             <div className="item">
@@ -120,10 +119,7 @@ const Contact = () => {
             <div className="item">
               <FaMapMarkerAlt />
               <span>
-                Uttam Nagar,
-                New Delhi,
-                Delhi 110059,
-                India
+                ShivExa Lights Showroom, 123 Fashion Street, New Delhi 110059, India
               </span>
             </div>
           </motion.div>

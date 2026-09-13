@@ -9,7 +9,7 @@ import QuoteDivider from "../../Components/QuoteDivider/QuoteDivider";
 import FAQ from "../../Components/FAQ's/FAQ's";
 import LocateUs from "../../Components/Locate Us/LocateUs";
 import LazySection from "../../Components/LazySection/LazySection";
-import useIntersectionObserver from "../../Hooks/useIntersectionObserver";
+import Testimonials from "../../Components/Testimonials/Testimonials";
 
 // Lazy‑loaded components (code‑split automatically)
 const FeaturedProducts = lazy(
@@ -22,21 +22,13 @@ const TrendingProducts = lazy(
 const Contact = lazy(() => import("../../Components/Contact/Contact"));
 
 const Home = () => {
-  const [lazyRef, isLazyVisible] = useIntersectionObserver();
-
   return (
     <div className="home">
       {/* Above‑the‑fold – loads immediately */}
       <Slider />
       <Chandelier />
 
-      {/* Sentinel – triggers lazy loading when scrolled into view */}
-      <div ref={lazyRef} style={{ height: "1px" }} />
-
-      {isLazyVisible && (
-        <LazySection
-          fallback={<div className="loading-skeleton">Loading...</div>}
-        >
+      <LazySection fallback={<div className="loading-skeleton">Loading...</div>}>
           <FeaturedProducts type="featured" />
           <Categories />
           <TrendingProducts />
@@ -56,11 +48,11 @@ const Home = () => {
             randomize={true}
           />
           <QuoteDivider />
+          <Testimonials />
           <FAQ />
           <LocateUs />
           <Contact />
-        </LazySection>
-      )}
+      </LazySection>
     </div>
   );
 };

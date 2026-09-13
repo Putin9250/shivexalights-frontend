@@ -1,0 +1,80 @@
+$gold:       #c9a86a;
+$gold-dark:  #b8924a;
+$whatsapp:   #25d366;
+$whatsapp-dark: #1ebe5d;
+$white:      #ffffff;
+$shadow:     0 4px 16px rgba(0, 0, 0, 0.15);
+$transition: 0.25s ease;
+
+.floating-actions {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 900;
+
+  @media (max-width: 480px) {
+    bottom: 1.25rem;
+    right: 1rem;
+  }
+}
+
+// ── Base button ──────────────────────────────────────────────────
+.fab {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: $shadow;
+  transition: transform $transition, box-shadow $transition, background $transition;
+  text-decoration: none;
+
+  svg {
+    font-size: 1.4rem;
+    color: $white;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+// ── WhatsApp ─────────────────────────────────────────────────────
+.fab--whatsapp {
+  background: $whatsapp;
+
+  &:hover {
+    background: $whatsapp-dark;
+  }
+}
+
+// ── Scroll to top ────────────────────────────────────────────────
+.fab--top {
+  background: $gold;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity $transition, transform $transition, background $transition, box-shadow $transition;
+
+  &:hover {
+    background: $gold-dark;
+  }
+
+  &.fab--visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}

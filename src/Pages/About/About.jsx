@@ -1,3 +1,4 @@
+import React from "react";
 import "./About.scss";
 import { motion } from "framer-motion";
 import {
@@ -184,4 +185,4 @@ const About = () => {
   );
 };
 
-export default About; 
+export default About;

@@ -16,62 +16,34 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-main">
         <div className="footer-section">
-          <h3 className="footer-title">Category</h3>
+          <h3 className="footer-title">Shop lighting</h3>
           <ul className="footer-links">
-            <li>
-              {" "}
-              <Link className="link" to={`/products/2`}>
-                Women
-              </Link>
-            </li>
-            <li>
-              <Link className="link" to={`/products/4`}>Men</Link>
-            </li>
-            <li>
-              <Link className="link" to={`/products/10`}>Children</Link>
-            </li>
-            <li>
-              <Link className="link" to={`/products/6`}>Accessories</Link>
-            </li>
-            <li>
-              <Link className="link" to={`/products/12`}>New Arrivals</Link>
-            </li>
-            <li>
-              <Link className="link" to={`/products/14`}>Sale</Link>
-            </li>
+            <li><Link className="link" to="/products?categories=chandelier">Chandeliers</Link></li>
+            <li><Link className="link" to="/products?categories=Hanging%20Light">Hanging Lights</Link></li>
+            <li><Link className="link" to="/products?categories=Ceiling%20Light">Ceiling Lights</Link></li>
+            <li><Link className="link" to="/products?categories=LED%20Mirror%20Lights">Mirror Lights</Link></li>
+            <li><Link className="link" to="/products?categories=Wall%20Light">Wall Lights</Link></li>
+            <li><Link className="link" to="/products?categories=Floor%20Lamp">Floor Lamps</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h3 className="footer-title">Quick Links</h3>
           <ul className="footer-links">
-            <li>
-              <a href="/faq">FAQ</a>
-            </li>
-            <li>
-              <a href="/pages">Pages</a>
-            </li>
-            <li>
-              <a href="/stores">Store Locator</a>
-            </li>
-            <li>
-              <a href="/compare">Compare</a>
-            </li>
-            <li>
-              <a href="/cookies">Cookie Policy</a>
-            </li>
-            <li>
-              <a href="/returns">Returns & Exchanges</a>
-            </li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/products">All products</Link></li>
+            <li><Link to="/blogs">Lighting journal</Link></li>
+            <li><Link to="/about">About ShivExa</Link></li>
+            <li><Link to="/contact">Contact us</Link></li>
+            <li><Link to="/order">My orders</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h3 className="footer-title">About Us</h3>
           <p className="footer-text">
-            ShivExa Lights is your premier destination for high-quality fashion
-            and accessories. We're committed to providing exceptional customer
-            service and bringing you the latest trends at competitive prices.
+            ShivExa Lights brings together statement chandeliers, elegant hanging
+            lights, mirror lights, and ambient lighting for distinctive interiors.
           </p>
           <div className="social-icons">
             <a href="https://facebook.com" aria-label="Facebook">
@@ -94,15 +66,15 @@ const Footer = () => {
           <div className="contact-info">
             <div className="contact-item">
               <LocationOnOutlinedIcon className="contact-icon" />
-              <span>123 Fashion Street, Style City, SC 12345</span>
+              <Link to="/contact">Contact ShivExa Lights</Link>
             </div>
             <div className="contact-item">
               <PhoneOutlinedIcon className="contact-icon" />
-              <span>+1 (555) 123-4567</span>
+              <Link to="/contact">Request a call back</Link>
             </div>
             <div className="contact-item">
               <EmailOutlinedIcon className="contact-icon" />
-              <span>support@shivexalights.com</span>
+              <Link to="/contact">Send an enquiry</Link>
             </div>
           </div>
           <div className="payment-methods">
@@ -118,11 +90,7 @@ const Footer = () => {
             <span className="copyright">
               © {currentYear} ShivExa Lights. All rights reserved.
             </span>
-            <div className="legal-links">
-              <a href="/privacy">Privacy Policy</a>
-              <a href="/terms">Terms of Service</a>
-              <a href="/sitemap">Sitemap</a>
-            </div>
+            <div className="legal-links"><Link to="/about">About</Link><Link to="/contact">Support</Link></div>
           </div>
 
           

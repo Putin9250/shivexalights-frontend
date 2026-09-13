@@ -93,7 +93,7 @@ const Checkout = () => {
       navigate("/order");
     } catch (err) {
       console.error("❌ COD Error:", err.response?.data || err.message);
-      alert("Order not saved!");
+      alert(err.response?.data?.error || "Order could not be saved. Please review your cart and try again.");
     }
 
     setLoading(false);
@@ -106,6 +106,15 @@ const Checkout = () => {
     setLoading(true);
 
     try {
+      const lineItems = cartProducts.map((item) => ({
+        documentId: item._id,
+        id: item.id,
+        title: item.title,
+        quantity: item.quantity,
+        size: item.size || null,
+      }));
+      await axios.post(`${import.meta.env.VITE_API_URL}/orders/validate`, { products: lineItems });
+
       const amountInPaise = totalPrice * 100;
 
       const { data: order } = await axios.post(
@@ -164,7 +173,7 @@ const Checkout = () => {
             navigate("/order");
           } catch (err) {
             console.error("❌ Save Error:", err.response?.data || err.message);
-            alert("Payment done but NOT saved!");
+            alert(err.response?.data?.error || "Payment completed, but the order could not be saved. Please contact support.");
           }
 
           setLoading(false);
@@ -179,7 +188,7 @@ const Checkout = () => {
       razor.open();
     } catch (error) {
       console.error("Payment Error:", error);
-      alert("Something went wrong");
+      alert(error.response?.data?.error || "Something went wrong. Please review your cart and try again.");
       setLoading(false);
     }
   };
@@ -213,7 +222,7 @@ const Checkout = () => {
                 <div>
                   <h4>{item.title}</h4>
                   <p>
-                    {item.quantity} × ₹{item.price}
+                    {item.quantity} × ₹{item.price}{item.size ? ` · ${item.size}` : ""}
                   </p>
                 </div>
                 <span>₹{item.price * item.quantity}</span>
