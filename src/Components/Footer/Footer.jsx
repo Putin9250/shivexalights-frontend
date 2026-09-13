@@ -19,12 +19,12 @@ const Footer = () => {
         <div className="footer-section">
           <h3 className="footer-title">Shop lighting</h3>
           <ul className="footer-links">
-            <li><Link className="link" to="/products?categories=chandelier">Chandeliers</Link></li>
-            <li><Link className="link" to="/products?categories=Hanging%20Light">Hanging Lights</Link></li>
-            <li><Link className="link" to="/products?categories=Ceiling%20Light">Ceiling Lights</Link></li>
-            <li><Link className="link" to="/products?categories=LED%20Mirror%20Lights">Mirror Lights</Link></li>
-            <li><Link className="link" to="/products?categories=Wall%20Light">Wall Lights</Link></li>
-            <li><Link className="link" to="/products?categories=Floor%20Lamp">Floor Lamps</Link></li>
+            <li><Link className="link" to="/collection?categories=chandelier">Chandeliers</Link></li>
+            <li><Link className="link" to="/collection?categories=Hanging%20Light">Hanging Lights</Link></li>
+            <li><Link className="link" to="/collection?categories=Ceiling%20Light">Ceiling Lights</Link></li>
+            <li><Link className="link" to="/collection?categories=LED%20Mirror%20Lights">Mirror Lights</Link></li>
+            <li><Link className="link" to="/collection?categories=Wall%20Light">Wall Lights</Link></li>
+            <li><Link className="link" to="/collection?categories=Floor%20Lamp">Floor Lamps</Link></li>
           </ul>
         </div>
 
@@ -32,7 +32,7 @@ const Footer = () => {
           <h3 className="footer-title">Quick Links</h3>
           <ul className="footer-links">
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/products">All products</Link></li>
+            <li><Link to="/collection">Collection</Link></li>
             <li><Link to="/blogs">Lighting journal</Link></li>
             <li><Link to="/about">About Shivexa Lighting</Link></li>
             <li><Link to="/contact">Contact us</Link></li>

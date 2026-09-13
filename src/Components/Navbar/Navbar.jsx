@@ -39,13 +39,13 @@ const Navbar = () => {
   };
 
   const shopCategories = [
-    { name: "Chandeliers", path: "/products?categories=chandelier" },
-    { name: "Hanging Lights", path: "/products?categories=Hanging%20Light" },
-    { name: "Ceiling Lights", path: "/products?categories=Ceiling%20Light" },
-    { name: "Mirror Lights", path: "/products?categories=LED%20Mirror%20Lights" },
-    { name: "Wall Lights", path: "/products?categories=Wall%20Light" },
-    { name: "Floor Lamps", path: "/products?categories=Floor%20Lamp" },
-    { name: "Outdoor Lighting", path: "/products?categories=Outdoor%20Lighting" },
+    { name: "Chandeliers", path: "/collection?categories=chandelier" },
+    { name: "Hanging Lights", path: "/collection?categories=Hanging%20Light" },
+    { name: "Ceiling Lights", path: "/collection?categories=Ceiling%20Light" },
+    { name: "Mirror Lights", path: "/collection?categories=LED%20Mirror%20Lights" },
+    { name: "Wall Lights", path: "/collection?categories=Wall%20Light" },
+    { name: "Floor Lamps", path: "/collection?categories=Floor%20Lamp" },
+    { name: "Outdoor Lighting", path: "/collection?categories=Outdoor%20Lighting" },
   ];
 
   // ===== Tagline Carousel =====
@@ -143,7 +143,7 @@ useEffect(() => {
               </div>
             </div>
             <Link to="/order" onClick={closeMobileMenu}>Orders</Link>
-            <Link to="/products" onClick={closeMobileMenu}>Collection</Link>
+            <Link to="/collection" onClick={closeMobileMenu}>Collection</Link>
             <Link to="/about" onClick={closeMobileMenu}>About</Link>
             <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
           </nav>
@@ -211,7 +211,7 @@ useEffect(() => {
             <Link to="/order" onClick={closeMobileMenu}>Orders</Link>
             <Link to="/about" onClick={closeMobileMenu}>About</Link>
             <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
-            <Link to="/products" onClick={closeMobileMenu}>Collection</Link>
+            <Link to="/collection" onClick={closeMobileMenu}>Collection</Link>
           </div>
           <div className="mobile-section">
             <h4>Account</h4>

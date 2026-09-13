@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { createHashRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import ScrollToTop from "./Hooks/useScrollToTop";
@@ -93,12 +93,14 @@ const AdminLayout = () => {
 };
 
 // ── Router definition ────────────────────────────────────────────────────
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
+      { path: "collection", element: <Products /> },
+      { path: "collection/:id", element: <Products /> },
       { path: "products", element: <Products /> },
       { path: "products/:id", element: <Products /> },
       { path: "product/:id", element: <Product /> },

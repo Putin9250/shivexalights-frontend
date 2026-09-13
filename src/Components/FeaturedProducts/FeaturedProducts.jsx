@@ -132,7 +132,7 @@ const FeaturedProducts = () => {
               An exclusive edit of sculptural lighting – where heritage meets
               contemporary minimalism.
             </p>
-            <Link to="/products/featured" className="hero-cta">
+            <Link to="/collection/featured" className="hero-cta">
               View entire collection <ArrowForwardIosIcon />
             </Link>
           </div>

@@ -188,7 +188,7 @@ const Chandelier = () => {
         {/* View All link */}
         <div style={{ textAlign: "center", marginTop: "2rem" }}>
           <Link
-            to="/products?category=chandelier"
+            to="/collection?category=chandelier"
             style={{
               color: "#c9a96e",
               textDecoration: "none",

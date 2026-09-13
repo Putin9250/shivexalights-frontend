@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 
 const pageMeta = {
   "/": { title: "Shivexa Lighting – Premium Lighting in Delhi", description: "Shivexa Lighting offers premium chandeliers, hanging lights, LED mirror lights, wall lights, and decorative lighting in Delhi." },
+  "/collection": { title: "Lighting Collection | Shivexa Lighting", description: "Explore chandeliers, hanging lights, ceiling lights, mirror lights, wall lights, and floor lamps." },
   "/products": { title: "Lighting Collection | Shivexa Lighting", description: "Explore chandeliers, hanging lights, ceiling lights, mirror lights, wall lights, and floor lamps." },
   "/about": { title: "About Shivexa Lighting", description: "Learn about Shivexa Lighting and our curated collection of decorative lighting." },
   "/contact": { title: "Contact Shivexa Lighting", description: "Contact Shivexa Lighting for product enquiries, support, and lighting assistance." },
@@ -28,8 +29,11 @@ const SEO = ({ noIndex = false }) => {
   useEffect(() => {
     const isProduct = location.pathname.startsWith("/product/");
     const isProductsPage = location.pathname.startsWith("/products/");
+    const isCollectionPage = location.pathname.startsWith("/collection/");
     const isBlog = location.pathname.startsWith("/blog/");
-    const meta = pageMeta[location.pathname] || (isProductsPage
+    const meta = pageMeta[location.pathname] || (isCollectionPage
+      ? pageMeta["/collection"]
+      : isProductsPage
       ? pageMeta["/products"]
       : isProduct
       ? { title: "Product | Shivexa Lighting", description: "Explore premium lighting from Shivexa Lighting." }
@@ -37,7 +41,8 @@ const SEO = ({ noIndex = false }) => {
         ? { title: "Lighting Article | Shivexa Lighting", description: "Read the latest lighting inspiration from Shivexa Lighting." }
         : pageMeta["/"]);
     const siteUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, "");
-    const canonicalUrl = `${siteUrl}/#${location.pathname}${location.search}`;
+    const routePath = location.pathname.replace(/\/+$/, "") || "/";
+    const canonicalUrl = `${siteUrl}${routePath}${location.search}`;
     const keywords = "Shivexa Lighting, chandeliers in Delhi, decorative lighting, hanging lights, LED mirror lights";
 
     document.title = meta.title;
