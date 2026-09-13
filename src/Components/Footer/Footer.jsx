@@ -34,7 +34,7 @@ const Footer = () => {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/products">All products</Link></li>
             <li><Link to="/blogs">Lighting journal</Link></li>
-            <li><Link to="/about">About Shiv exa</Link></li>
+            <li><Link to="/about">About Shivexa Lighting</Link></li>
             <li><Link to="/contact">Contact us</Link></li>
             <li><Link to="/order">My orders</Link></li>
           </ul>

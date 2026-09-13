@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const pageMeta = {
-  "/": { title: "Shivexa Lighting | Shiv exa Lights – Premium Lighting in Delhi", description: "Shivexa Lighting, also known as Shiv exa Lights, offers premium chandeliers, hanging lights, LED mirror lights, wall lights, and decorative lighting in Delhi." },
+  "/": { title: "Shivexa Lighting – Premium Lighting in Delhi", description: "Shivexa Lighting offers premium chandeliers, hanging lights, LED mirror lights, wall lights, and decorative lighting in Delhi." },
   "/products": { title: "Lighting Collection | Shivexa Lighting", description: "Explore chandeliers, hanging lights, ceiling lights, mirror lights, wall lights, and floor lamps." },
   "/about": { title: "About Shivexa Lighting", description: "Learn about Shivexa Lighting and our curated collection of decorative lighting." },
   "/contact": { title: "Contact Shivexa Lighting", description: "Contact Shivexa Lighting for product enquiries, support, and lighting assistance." },
@@ -38,7 +38,7 @@ const SEO = ({ noIndex = false }) => {
         : pageMeta["/"]);
     const siteUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, "");
     const canonicalUrl = `${siteUrl}/#${location.pathname}${location.search}`;
-    const keywords = "Shivexa Lighting, Shiv exa Lighting, Shiv exa Lights, chandeliers in Delhi, decorative lighting, hanging lights, LED mirror lights";
+    const keywords = "Shivexa Lighting, chandeliers in Delhi, decorative lighting, hanging lights, LED mirror lights";
 
     document.title = meta.title;
     setMeta('meta[name="description"]', ["name", "description"], meta.description);
@@ -68,7 +68,6 @@ const SEO = ({ noIndex = false }) => {
         "@context": "https://schema.org",
         "@type": "HomeAndConstructionBusiness",
         name: "Shivexa Lighting",
-        alternateName: ["Shiv exa Lighting", "Shiv exa Lights"],
         url: siteUrl,
         logo: `${siteUrl}/shivexa-lighting-logo.png`,
         image: `${siteUrl}/shivexa-lighting-logo.png`,

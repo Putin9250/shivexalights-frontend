@@ -74,7 +74,7 @@ const AdminPanel = () => {
   // Blog form
   const emptyBlog = {
     title: "", excerpt: "", content: "", coverImg: "",
-    author: "Shiv exa Editorial", tags: "", isPublished: true,
+    author: "Shivexa Lighting Editorial", tags: "", isPublished: true,
   };
   const [blogForm, setBlogForm] = useState(emptyBlog);
   const [editingBlog, setEditingBlog] = useState(null);
@@ -466,7 +466,7 @@ const AdminPanel = () => {
         <div className="login-card">
           <div className="login-brand">
             <span className="login-logo">✦</span>
-            <h1>Shiv exa Admin</h1>
+            <h1>Shivexa Lighting Admin</h1>
             <p>Control Panel — Restricted Access</p>
           </div>
           <form onSubmit={handlePasswordSubmit}>
@@ -503,7 +503,7 @@ const AdminPanel = () => {
       <aside className="admin-sidebar">
         <div className="sidebar-header">
           <span className="brand-mark">✦</span>
-          {sidebarOpen && <span className="brand-name">Shiv exa</span>}
+          {sidebarOpen && <span className="brand-name">Shivexa Lighting</span>}
           <button className="toggle-btn" onClick={() => setSidebarOpen(p => !p)}>
             {sidebarOpen ? "◀" : "▶"}
           </button>

@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import "./Blog.scss";
 
-const formatBrandName = (value) => String(value || "Shiv exa Team")
-  .replace(/\bShivExa\b/g, "Shiv exa")
-  .replace(/\bShiv Exa\b/g, "Shiv exa");
+const formatBrandName = (value) => String(value || "Shivexa Lighting Team")
+  .replace(/\bShivExa(?:\s+Lights|\s+Lighting)?\b/g, "Shivexa Lighting")
+  .replace(/\bShiv Exa(?:\s+Lights|\s+Lighting)?\b/g, "Shivexa Lighting")
+  .replace(/\bShiv exa(?:\s+Lights|\s+Lighting)?\b/g, "Shivexa Lighting");
 
 const Blog = () => {
   const { data: blogs, loading, error } = useFetch("/blogs");
@@ -17,7 +18,7 @@ const Blog = () => {
       excerpt: "Explore the harmony between architectural minimalism and warm ambient illumination. Learn how statement chandeliers elevate luxury interiors.",
       coverImg: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1200",
       createdAt: new Date().toISOString(),
-      author: "Shiv exa Editorial",
+      author: "Shivexa Lighting Editorial",
       tags: ["Interior Design", "Trends", "Chandeliers"]
     },
     {
@@ -26,7 +27,7 @@ const Blog = () => {
       excerpt: "Warm white vs cool daylight: how lighting warmth affects mood, productivity, and aesthetics across living rooms and bedrooms.",
       coverImg: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1200",
       createdAt: new Date().toISOString(),
-      author: "Shiv exa Lighting Guide",
+      author: "Shivexa Lighting Guide",
       tags: ["Guide", "LED Lighting"]
     }
   ];
@@ -36,7 +37,7 @@ const Blog = () => {
   return (
     <div className="blog-page">
       <div className="blog-hero">
-        <span className="eyebrow">Shiv exa Editorial</span>
+        <span className="eyebrow">Shivexa Lighting Editorial</span>
         <h1>Illumination Insights & Stories</h1>
         <p>Discover expert guidance, interior styling tips, and the latest trends in luxury lighting.</p>
       </div>
