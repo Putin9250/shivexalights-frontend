@@ -532,6 +532,10 @@ $transition: 0.3s ease;
 
 /* ≤1024px: hamburger replaces nav links */
 @media (max-width: 1024px) {
+  .brand {
+    display: none;
+  }
+
   .hamburger {
     display: block;
   }

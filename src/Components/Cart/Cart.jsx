@@ -30,6 +30,16 @@ const Cart = ({ onClose }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
+  // Correct quantities saved before stock limits were added to every catalogue card.
+  useEffect(() => {
+    products.forEach((item) => {
+      const stock = Number(item.stock);
+      if (Number.isFinite(stock) && stock > 0 && item.quantity > stock) {
+        dispatch(updateQuantity({ _id: item._id, size: item.size, quantity: stock }));
+      }
+    });
+  }, [dispatch, products]);
+
   const handleCheckout = () => {
     onClose();
     navigate("/checkout");
@@ -38,8 +48,9 @@ const Cart = ({ onClose }) => {
   const handleQty = (item, delta) => {
     const next = item.quantity + delta;
     if (next < 1) return;
-    const maxStock = item.stock ?? Infinity;
-    if (delta > 0 && maxStock !== Infinity && next > maxStock) return;
+    const maxStock = Number(item.stock);
+    if (!Number.isFinite(maxStock) || maxStock < 1) return;
+    if (delta > 0 && next > maxStock) return;
     dispatch(updateQuantity({ _id: item._id, size: item.size, quantity: next }));
   };
 
@@ -94,7 +105,7 @@ const Cart = ({ onClose }) => {
                     <button
                       className="qty-btn"
                       onClick={() => handleQty(item, +1)}
-                      disabled={item.stock !== undefined && item.quantity >= item.stock}
+                      disabled={!Number.isFinite(Number(item.stock)) || Number(item.stock) < 1 || item.quantity >= Number(item.stock)}
                     >+</button>
                   </div>
                   {item.stock !== undefined && item.stock > 0 && item.stock <= 5 && (

@@ -75,6 +75,7 @@ const trendingProducts = data?.products?.filter((item) => item.isTrending) || []
           price: item.price,
           img: item.img,
           quantity: 1,
+          stock: item.stock,
         }),
       );
     }

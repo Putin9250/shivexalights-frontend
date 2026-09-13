@@ -126,6 +126,7 @@ const CategorySlider = ({ category, title, description, randomize = false }) => 
           price: item.price,
           img: item.img,
           quantity: 1,
+          stock: item.stock,
         })
       );
     }
