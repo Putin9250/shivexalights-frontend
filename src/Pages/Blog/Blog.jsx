@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import "./Blog.scss";
 
+const formatBrandName = (value) => String(value || "Shiv exa Team")
+  .replace(/\bShivExa\b/g, "Shiv exa")
+  .replace(/\bShiv Exa\b/g, "Shiv exa");
+
 const Blog = () => {
   const { data: blogs, loading, error } = useFetch("/blogs");
 
@@ -13,7 +17,7 @@ const Blog = () => {
       excerpt: "Explore the harmony between architectural minimalism and warm ambient illumination. Learn how statement chandeliers elevate luxury interiors.",
       coverImg: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1200",
       createdAt: new Date().toISOString(),
-      author: "ShivExa Editorial",
+      author: "Shiv exa Editorial",
       tags: ["Interior Design", "Trends", "Chandeliers"]
     },
     {
@@ -22,7 +26,7 @@ const Blog = () => {
       excerpt: "Warm white vs cool daylight: how lighting warmth affects mood, productivity, and aesthetics across living rooms and bedrooms.",
       coverImg: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1200",
       createdAt: new Date().toISOString(),
-      author: "ShivExa Lighting Guide",
+      author: "Shiv exa Lighting Guide",
       tags: ["Guide", "LED Lighting"]
     }
   ];
@@ -32,7 +36,7 @@ const Blog = () => {
   return (
     <div className="blog-page">
       <div className="blog-hero">
-        <span className="eyebrow">ShivExa Editorial</span>
+        <span className="eyebrow">Shiv exa Editorial</span>
         <h1>Illumination Insights & Stories</h1>
         <p>Discover expert guidance, interior styling tips, and the latest trends in luxury lighting.</p>
       </div>
@@ -56,7 +60,7 @@ const Blog = () => {
                 <div className="card-meta">
                   <span>{new Date(article.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                   <span>•</span>
-                  <span>{article.author || "ShivExa Team"}</span>
+                  <span>{formatBrandName(article.author)}</span>
                 </div>
                 <h2>{article.title}</h2>
                 <p>{article.excerpt}</p>
