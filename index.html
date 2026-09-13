@@ -16,12 +16,22 @@
   <link rel="icon" type="image/png" href="/shivexa-lighting-logo.png" />
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/assets/main-1cdaf3bc.js"></script>
+  <script type="module" crossorigin src="/assets/main-caa7b5b6.js"></script>
   <link rel="stylesheet" href="/assets/main-0bd45dd9.css">
 </head>
 
 <body>
   <div id="root"></div>
+  <script>
+    // GitHub Pages serves 404.html for unknown SPA URLs. Restore the original
+    // route before React mounts so shared product, blog and checkout links work.
+    (function () {
+      const route = new URLSearchParams(window.location.search).get("_route");
+      if (route && route.startsWith("/") && !route.startsWith("//")) {
+        window.history.replaceState(null, "", route);
+      }
+    })();
+  </script>
   
 
 </body>
