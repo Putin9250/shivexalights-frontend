@@ -142,25 +142,22 @@ $transition: 0.3s ease;
   }
 }
 
-/* Brand (no logo image) */
+/* Brand */
 .brand {
   display: flex;
   align-items: center;
   text-decoration: none;
 
-  .brand-text {
-    font-family: 'Great Vibes', cursive;
-    font-size: 32px;
-    font-weight: 400;
-    color: $rose-gold;
-    letter-spacing: 0.5px;
-    transition: color $transition;
-    line-height: 1;
-    white-space: nowrap;
+  .brand-logo {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+    display: block;
+    transition: transform $transition;
   }
 
-  &:hover .brand-text {
-    color: $rose-dark;
+  &:hover .brand-logo {
+    transform: scale(1.04);
   }
 }
 
@@ -416,17 +413,19 @@ $transition: 0.3s ease;
     right: 0;
   }
 
-  .mobile-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid $border;
-    .mobile-brand-text {
-      font-family: 'Great Vibes', cursive;
-      font-size: 22px;
-      color: $rose-gold;
-    }
+    .mobile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid $border;
+
+      .mobile-brand-logo {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+        display: block;
+      }
     .close-btn {
       background: none;
       border: none;
@@ -560,7 +559,7 @@ $transition: 0.3s ease;
 
   .navbar {
     height: 70px;
-    .brand-text { font-size: 28px; }
+    .brand-logo { width: 58px; height: 58px; }
   }
 
   /* Hide inline search expansion, use panel */
@@ -588,7 +587,7 @@ $transition: 0.3s ease;
   .navbar {
     height: 60px;
     .wrapper { padding: 0 10px; }
-    .brand-text { font-size: 24px; }
+    .brand-logo { width: 50px; height: 50px; }
   }
 
   .hide-mobile { display: none !important; }

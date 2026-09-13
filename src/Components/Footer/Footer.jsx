@@ -8,6 +8,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import PaymentMethodPhoto from "../../../Images/payment.png"
+import BrandLogo from "../../../Images/shivexa-lighting-logo.png";
 import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -66,15 +67,15 @@ const Footer = () => {
           <div className="contact-info">
             <div className="contact-item">
               <LocationOnOutlinedIcon className="contact-icon" />
-              <Link to="/contact">Contact Shivexa Lighting</Link>
+              <a href="https://maps.app.goo.gl/PC8B2rEH3dyBRkf29" target="_blank" rel="noopener noreferrer">4A, 21, Tilak Nagar, Delhi, 110018</a>
             </div>
             <div className="contact-item">
               <PhoneOutlinedIcon className="contact-icon" />
-              <Link to="/contact">Request a call back</Link>
+              <a href="tel:+917428277019">+91 7428 277 019</a>
             </div>
             <div className="contact-item">
               <EmailOutlinedIcon className="contact-icon" />
-              <Link to="/contact">Send an enquiry</Link>
+              <a href="mailto:roysakshi037@gmail.com">roysakshi037@gmail.com</a>
             </div>
           </div>
           <div className="payment-methods">
@@ -86,7 +87,7 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="footer-bottom-content">
           <div className="copyright-section">
-            <span className="logo">Shivexa Lighting</span>
+            <img className="footer-logo-image" src={BrandLogo} alt="Shivexa Lighting" />
             <span className="copyright">
               © {currentYear} Shivexa Lighting. All rights reserved.
             </span>

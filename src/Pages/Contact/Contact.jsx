@@ -113,14 +113,14 @@ const Contact = () => {
 
             <div className="item">
               <FaPhoneAlt />
-              <span>+91 95825 86200</span>
+              <a href="tel:+917428277019">+91 7428 277 019</a>
             </div>
 
             <div className="item">
               <FaMapMarkerAlt />
-              <span>
-                Shivexa Lighting Showroom, 123 Fashion Street, New Delhi 110059, India
-              </span>
+              <a href="https://maps.app.goo.gl/PC8B2rEH3dyBRkf29" target="_blank" rel="noopener noreferrer">
+                4A, 21, Tilak Nagar, Delhi, 110018
+              </a>
             </div>
           </motion.div>
 
