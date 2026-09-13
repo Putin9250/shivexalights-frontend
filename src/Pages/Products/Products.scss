@@ -40,7 +40,9 @@ $transition: 0.25s ease;
   top: 90px;
   border: 1px solid $border-light;
 
-  @media (max-width: 768px) {
+  // Tablet screens need the full width for usable product cards. Filters move
+  // to the same drawer used on mobile instead of compressing the grid.
+  @media (max-width: 1024px) {
     display: none;
   }
 
@@ -139,6 +141,7 @@ $transition: 0.25s ease;
 // ── MAIN CONTENT ───────────────────────────────────────────────────
 .products-main {
   flex: 1;
+  min-width: 0;
 
   .products-header {
     display: flex;
@@ -169,7 +172,7 @@ $transition: 0.25s ease;
       cursor: pointer;
       gap: 0.4rem;
       align-items: center;
-      @media (max-width: 768px) {
+      @media (max-width: 1024px) {
         display: flex;
       }
     }
