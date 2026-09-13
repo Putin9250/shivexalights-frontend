@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Product.scss";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useDispatch, useSelector } from "react-redux";
@@ -311,6 +311,9 @@ const Product = () => {
             <div className="item">📦 Delivery in 3–5 days</div>
             <div className="item">↩ 7-day return policy</div>
           </div>
+          <p className="delivery-note">
+            Delivery is available in New Delhi only. For other locations, please <Link to="/contact">contact us</Link>.
+          </p>
         </div>
       </div>
       <RandomProducts count={8} currentProductId={product._id} selectedProducts={product.recommendedProducts} />
