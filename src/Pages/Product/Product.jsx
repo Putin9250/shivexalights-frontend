@@ -10,14 +10,40 @@ import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { toggleWishlist } from "../../redux/wishlistReducer";
 import RandomProducts from "../../Components/RandomProducts/RandomProducts";
 
+const ProductImage = ({ src, fallback, skeletonClassName, alt, loading, onClick }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  const handleImageNode = (node) => {
+    if (node?.complete) setLoaded(true);
+  };
+
+  const handleError = (event) => {
+    if (event.currentTarget.src !== fallback) event.currentTarget.src = fallback;
+    setLoaded(true);
+  };
+
+  return (
+    <>
+      {!loaded && <div className={skeletonClassName} />}
+      <img
+        ref={handleImageNode}
+        src={src || fallback}
+        alt={alt}
+        loading={loading}
+        onClick={onClick}
+        onLoad={() => setLoaded(true)}
+        onError={handleError}
+      />
+    </>
+  );
+};
+
 const Product = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [selectedImg, setSelectedImg] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [mainImageLoaded, setMainImageLoaded] = useState(false);
-  const [thumbnailsLoaded, setThumbnailsLoaded] = useState({});
 
   const { data, loading, error } = useFetch(`/products/${id}`);
   const wishlist = useSelector((state) => state.wishlist.products);
@@ -31,8 +57,6 @@ const Product = () => {
   useEffect(() => {
     setSelectedImg(0);
     setQuantity(1);
-    setMainImageLoaded(false);
-    setThumbnailsLoaded({});
     const firstAvailableSize = sizes.find((size) => {
       const sizeStock = Number.isFinite(Number(size.stock)) ? Number(size.stock) : Number(product?.stock ?? 0);
       return sizeStock > 0;
@@ -153,42 +177,33 @@ const Product = () => {
     }
   };
 
-  const handleMainImageLoad = () => setMainImageLoaded(true);
-  const handleThumbnailLoad = (index) => {
-    setThumbnailsLoaded((prev) => ({ ...prev, [index]: true }));
-  };
-
   return (
     <>
       <div className="product">
         <div className="left">
           <div className="images">
             {images.map((img, index) => (
-              <div key={index} className="thumbnail-wrapper">
-                {/* Skeleton overlay – hidden after image loads */}
-                {!thumbnailsLoaded[index] && (
-                  <div className="thumbnail-skeleton" />
-                )}
-                <img
+              <div key={img} className="thumbnail-wrapper">
+                <ProductImage
+                  key={img}
                   src={img}
+                  fallback={fallbackImage}
+                  skeletonClassName="thumbnail-skeleton"
                   alt=""
                   loading="lazy"
                   onClick={() => handleThumbnailClick(index)}
-                  onError={(e) => (e.target.src = fallbackImage)}
-                  onLoad={() => handleThumbnailLoad(index)}
                 />
               </div>
             ))}
           </div>
           <div className="mainImg">
-            {/* Skeleton overlay – hidden after image loads */}
-            {!mainImageLoaded && <div className="main-image-skeleton" />}
-            <img
-              src={images[selectedImg] || fallbackImage}
-              alt=""
-              loading="lazy"
-              onError={(e) => (e.target.src = fallbackImage)}
-              onLoad={handleMainImageLoad}
+            <ProductImage
+              key={images[selectedImg] || fallbackImage}
+              src={images[selectedImg]}
+              fallback={fallbackImage}
+              skeletonClassName="main-image-skeleton"
+              alt={product.title}
+              loading="eager"
             />
           </div>
         </div>
