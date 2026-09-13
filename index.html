@@ -20,6 +20,16 @@
 
 <body>
   <div id="root"></div>
+  <script>
+    // GitHub Pages serves 404.html for unknown SPA URLs. Restore the original
+    // route before React mounts so shared product, blog and checkout links work.
+    (function () {
+      const route = new URLSearchParams(window.location.search).get("_route");
+      if (route && route.startsWith("/") && !route.startsWith("//")) {
+        window.history.replaceState(null, "", route);
+      }
+    })();
+  </script>
   <script type="module" src="/src/main.jsx"></script>
 
 </body>

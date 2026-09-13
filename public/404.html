@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <script>
+      // Preserve any route GitHub Pages cannot serve as a static file, then
+      // send it to the SPA entry point. index.html restores it before React loads.
+      (function () {
+        var route = window.location.pathname + window.location.search + window.location.hash;
+        window.location.replace("/?_route=" + encodeURIComponent(route));
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

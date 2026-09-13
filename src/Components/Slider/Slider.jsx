@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Hero1 from "../../../Images/what.jpg";
+import Hero1 from "../../../Images/shivexa-showroom-hero.jpeg";
 import Hero2 from "../../../Images/what2.jpeg";
 import Hero3 from "../../../Images/what3.jpg";
 import "./Slider.scss";
