@@ -102,7 +102,7 @@ const Contact = () => {
 
           <motion.p variants={fadeInUpVariants}>
             Have an inquiry about our chandeliers, architectural lighting, or custom orders?
-            ShivExa Lights is dedicated to bringing timeless brilliance and modern elegance to your home or workspace.
+            Shivexa Lighting is dedicated to bringing timeless brilliance and modern elegance to your home or workspace.
           </motion.p>
 
           <motion.div className="info" variants={fadeInUpVariants}>
@@ -119,7 +119,7 @@ const Contact = () => {
             <div className="item">
               <FaMapMarkerAlt />
               <span>
-                ShivExa Lights Showroom, 123 Fashion Street, New Delhi 110059, India
+                Shivexa Lighting Showroom, 123 Fashion Street, New Delhi 110059, India
               </span>
             </div>
           </motion.div>

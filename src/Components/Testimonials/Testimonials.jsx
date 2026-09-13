@@ -25,7 +25,7 @@ const Testimonials = () => {
         <div className="section-header">
           <span className="eyebrow">Client Feedback</span>
           <h2>Loved by Designers & Homeowners</h2>
-          <p>Read what our clients say about their ShivExa Lights experience.</p>
+          <p>Read what our clients say about their Shivexa Lighting experience.</p>
         </div>
 
         {displayList.length > 0 && (

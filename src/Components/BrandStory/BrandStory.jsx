@@ -82,7 +82,7 @@ const ShivexaLightsBrandStory = () => {
             variants={fadeUpVariants}
             className="brand-story__paragraph"
           >
-            At Shivexa Lights, we believe lighting is more than illumination—it
+            At Shivexa Lighting, we believe lighting is more than illumination—it
             is atmosphere, emotion, and design working together to transform a
             space.
           </motion.p>
@@ -91,7 +91,7 @@ const ShivexaLightsBrandStory = () => {
             variants={fadeUpVariants}
             className="brand-story__paragraph"
           >
-            Born from a passion for craftsmanship and innovation, Shivexa Lights
+            Born from a passion for craftsmanship and innovation, Shivexa Lighting
             creates lighting solutions that blend timeless elegance with
             contemporary aesthetics. Every fixture is carefully designed to
             enhance homes, hospitality spaces, offices, and architectural
@@ -121,7 +121,7 @@ const ShivexaLightsBrandStory = () => {
             className="brand-story__signature"
           >
             <div className="brand-story__signature-line"></div>
-            <span>Shivexa Lights</span>
+            <span>Shivexa Lighting</span>
           </motion.div>
         </motion.div>
       </div>

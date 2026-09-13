@@ -113,7 +113,7 @@ useEffect(() => {
           </button>
 
           <Link to="/" className="brand" onClick={closeMobileMenu}>
-            <span className="brand-text">ShivExa Lights</span>
+            <span className="brand-text">Shivexa Lighting</span>
           </Link>
 
           <nav className="nav-links">
@@ -190,7 +190,7 @@ useEffect(() => {
       )}
       <div className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
         <div className="mobile-header">
-          <span className="mobile-brand-text">ShivExa Lights</span>
+          <span className="mobile-brand-text">Shivexa Lighting</span>
           <button className="close-btn" onClick={closeMobileMenu}>
             <CloseIcon />
           </button>

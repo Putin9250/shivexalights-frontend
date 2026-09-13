@@ -25,7 +25,7 @@ const About = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          SHIVEXA LIGHTS
+          SHIVEXA LIGHTING
         </motion.span>
 
         <motion.h1
@@ -42,7 +42,7 @@ const About = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          At Shivexa Lights, we believe lighting is more than illumination.
+          At Shivexa Lighting, we believe lighting is more than illumination.
           It defines mood, enhances design, and transforms everyday spaces
           into beautiful experiences.
         </motion.p>
@@ -55,7 +55,7 @@ const About = () => {
           <h2>Who We Are</h2>
 
           <p>
-            Shivexa Lights is dedicated to bringing modern, stylish and
+            Shivexa Lighting is dedicated to bringing modern, stylish and
             high-quality lighting solutions to homes, offices and commercial
             spaces.
           </p>
@@ -149,7 +149,7 @@ const About = () => {
       {/* WHY CHOOSE */}
 
       <section className="why-us">
-        <h2>Why Choose Shivexa Lights?</h2>
+        <h2>Why Choose Shivexa Lighting?</h2>
 
         <div className="grid">
           <div className="box">

@@ -42,7 +42,7 @@ const Footer = () => {
         <div className="footer-section">
           <h3 className="footer-title">About Us</h3>
           <p className="footer-text">
-            ShivExa Lights brings together statement chandeliers, elegant hanging
+            Shivexa Lighting brings together statement chandeliers, elegant hanging
             lights, mirror lights, and ambient lighting for distinctive interiors.
           </p>
           <div className="social-icons">
@@ -66,7 +66,7 @@ const Footer = () => {
           <div className="contact-info">
             <div className="contact-item">
               <LocationOnOutlinedIcon className="contact-icon" />
-              <Link to="/contact">Contact ShivExa Lights</Link>
+              <Link to="/contact">Contact Shivexa Lighting</Link>
             </div>
             <div className="contact-item">
               <PhoneOutlinedIcon className="contact-icon" />
@@ -86,9 +86,9 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="footer-bottom-content">
           <div className="copyright-section">
-            <span className="logo">ShivExa Lights</span>
+            <span className="logo">Shivexa Lighting</span>
             <span className="copyright">
-              © {currentYear} ShivExa Lights. All rights reserved.
+              © {currentYear} Shivexa Lighting. All rights reserved.
             </span>
             <div className="legal-links"><Link to="/about">About</Link><Link to="/contact">Support</Link></div>
           </div>

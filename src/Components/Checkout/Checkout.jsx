@@ -126,7 +126,7 @@ const Checkout = () => {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
-        name: "ShivExa Lights",
+        name: "Shivexa Lighting",
         description: "Order Payment",
         order_id: order.id,
         prefill: {

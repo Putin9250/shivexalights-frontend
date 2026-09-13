@@ -52,7 +52,7 @@ const LocateUs = () => {
         <div className={`locate-map ${isVisible ? "animate" : ""}`}>
           <div className="map-wrapper">
             <iframe
-              title="ShivExa Lights Studio Location"
+              title="Shivexa Lighting Studio Location"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.744188375844!2d77.21637131508224!3d28.613589782421673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce2daa9b2b8b7%3A0x7e4e8b1b7b2b8b7!2sConnaught%20Place%2C%20New%20Delhi%2C%20India!5e0!3m2!1sen!2sin!4v1621234567890!5m2!1sen!2sin"
               width="100%"
               height="100%"

@@ -42,7 +42,7 @@ const Product = () => {
 
   useEffect(() => {
     if (!product) return undefined;
-    document.title = `${product.title} | ShivExa Lights`;
+    document.title = `${product.title} | Shivexa Lighting`;
     const schemaId = "shivexa-product-schema";
     document.getElementById(schemaId)?.remove();
     const script = document.createElement("script");
