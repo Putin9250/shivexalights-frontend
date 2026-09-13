@@ -26,13 +26,6 @@ const Navbar = () => {
   const { openSignIn } = useClerk();
   const { user, isSignedIn } = useUser();
 
-  useEffect(() => {
-    if (!isSignedIn) {
-      const timer = setTimeout(() => openSignIn(), 1200);
-      return () => clearTimeout(timer);
-    }
-  }, [isSignedIn, openSignIn]);
-
   const cartProducts = useSelector((state) => state.cart.products);
   const wishlistProducts = useSelector((state) => state.wishlist.products);
   const cartCount = cartProducts.reduce((total, item) => total + item.quantity, 0);
