@@ -141,8 +141,19 @@
             margin-top: 2px;
           }
 
-          span {
+          span,
+          a {
             line-height: 1.5;
+            color: #b0b0b0;
+          }
+
+          a {
+            text-decoration: none;
+            transition: color 0.2s ease;
+
+            &:hover {
+              color: #ffffff;
+            }
           }
         }
       }

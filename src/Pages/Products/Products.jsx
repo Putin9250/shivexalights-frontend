@@ -12,6 +12,12 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 const LIMIT = 12;
 const INITIAL_VISIBLE = 5;
 
+const formatCategoryLabel = (category) => {
+  if (category === "featured") return "Featured";
+  if (category === "trending") return "Trending";
+  return category;
+};
+
 const Products = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -233,7 +239,7 @@ const Products = () => {
                   checked={selectedCategories.includes(cat)}
                   onChange={() => toggleCategory(cat)}
                 />
-                <span>{cat}</span>
+                <span>{formatCategoryLabel(cat)}</span>
               </label>
             ))}
           </div>
@@ -335,7 +341,7 @@ const Products = () => {
                         checked={selectedCategories.includes(cat)}
                         onChange={() => toggleCategory(cat)}
                       />
-                      <span>{cat}</span>
+                      <span>{formatCategoryLabel(cat)}</span>
                     </label>
                   ))}
                 </div>
