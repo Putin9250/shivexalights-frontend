@@ -42,7 +42,7 @@ const LocateUs = () => {
               </div>
               <div className="detail">
                 <span className="detail-label">Email</span>
-                <p>studio@shivexalights.com</p>
+                <p><a href="mailto:roysakshi037@gmail.com">roysakshi037@gmail.com</a></p>
               </div>
             </div>
           </div>
