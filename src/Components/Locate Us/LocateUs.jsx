@@ -40,7 +40,7 @@ const LocateUs = () => {
               </div>
               <div className="detail">
                 <span className="detail-label">Phone</span>
-                <p><a href="tel:+917428277019">+91 7428 277 019</a></p>
+                <p><a href="tel:+919582586200">+91 9582 5862 00</a></p>
               </div>
               <div className="detail">
                 <span className="detail-label">Email</span>

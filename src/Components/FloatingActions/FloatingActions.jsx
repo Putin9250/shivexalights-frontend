@@ -3,7 +3,7 @@ import "./FloatingActions.scss";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
-const WHATSAPP_NUMBER = "917428277019"; // ← replace with your number (country code + number, no + or spaces)
+const WHATSAPP_NUMBER = "919582586200"; // ← replace with your number (country code + number, no + or spaces)
 const WHATSAPP_MESSAGE = "Hi! I'd like to know more about your lighting products.";
 
 const FloatingActions = () => {

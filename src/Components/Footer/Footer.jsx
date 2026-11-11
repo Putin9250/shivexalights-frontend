@@ -71,7 +71,7 @@ const Footer = () => {
             </div>
             <div className="contact-item">
               <PhoneOutlinedIcon className="contact-icon" />
-              <a href="tel:+917428277019">+91 7428 277 019</a>
+              <a href="tel:+919582586200">+91 9582 5862 00</a>
             </div>
             <div className="contact-item">
               <EmailOutlinedIcon className="contact-icon" />
