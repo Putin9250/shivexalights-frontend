@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* ===== GLOBAL RESET ===== */
 body {
   margin: 0;
@@ -294,7 +296,7 @@ $transition: 0.3s ease;
     font-size: 14px;
     color: $text-dark;
     &::placeholder {
-      color: lighten($text-muted, 10%);
+      color: color.adjust($text-muted, $lightness: 10%);
     }
   }
 
@@ -522,7 +524,7 @@ $transition: 0.3s ease;
       color: $text-dark;
       background: $blush-light;
       &::placeholder {
-        color: lighten($text-muted, 10%);
+        color: color.adjust($text-muted, $lightness: 10%);
       }
     }
   }

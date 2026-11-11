@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Products.scss – clean, premium, responsive
 
 $ivory: #fefaf5;
@@ -387,7 +389,7 @@ $transition: 0.25s ease;
         border: none;
         color: white;
         &:hover {
-          background: darken($gold, 8%);
+          background: color.adjust($gold, $lightness: -8%);
         }
       }
     }

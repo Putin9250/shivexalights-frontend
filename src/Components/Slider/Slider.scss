@@ -1,5 +1,7 @@
 /* ===== COLOUR VARIABLES ===== */
 $deep-red: #710e0f;
+@use "sass:color";
+
 $gold: #c9a43b;
 $dark-bg: #0a0a0a;
 $text-light: #f5f0eb;
@@ -113,7 +115,7 @@ $transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     text-decoration: none;
 
     &:hover {
-      background: darken($gold, 10%);
+      background: color.adjust($gold, $lightness: -10%);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
