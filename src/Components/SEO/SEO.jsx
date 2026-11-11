@@ -76,7 +76,7 @@ const SEO = ({ noIndex = false }) => {
         url: siteUrl,
         logo: `${siteUrl}/shivexa-lighting-logo.png`,
         image: `${siteUrl}/shivexa-lighting-logo.png`,
-        email: "roysakshi037@gmail.com",
+        email: "uttamwebsolution@gmail.com",
         telephone: "+91-7428-277-019",
         address: {
           "@type": "PostalAddress",

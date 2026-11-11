@@ -108,7 +108,7 @@ const Contact = () => {
           <motion.div className="info" variants={fadeInUpVariants}>
             <div className="item">
               <FaEnvelope />
-              <a href="mailto:roysakshi037@gmail.com">roysakshi037@gmail.com</a>
+              <a href="mailto:roysuttamwebsolutionakshi037@gmail.com">uttamwebsolution@gmail.com</a>
             </div>
 
             <div className="item">

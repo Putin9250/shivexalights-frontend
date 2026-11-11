@@ -75,7 +75,7 @@ const Footer = () => {
             </div>
             <div className="contact-item">
               <EmailOutlinedIcon className="contact-icon" />
-              <a href="mailto:roysakshi037@gmail.com">roysakshi037@gmail.com</a>
+              <a href="mailto:uttamwebsolution@gmail.com">uttamwebsolution@gmail.com</a>
             </div>
           </div>
           <div className="payment-methods">
