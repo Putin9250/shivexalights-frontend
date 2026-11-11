@@ -41,10 +41,11 @@ $shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       margin-bottom: 36px;
 
       .login-logo {
-        font-size: 2.5rem;
-        color: $gold;
         display: block;
-        margin-bottom: 12px;
+        width: 94px;
+        height: 94px;
+        object-fit: contain;
+        margin: 0 auto 16px;
       }
 
       h1 {
@@ -136,15 +137,10 @@ $shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     gap: 11px;
 
     .brand-mark {
-      display: grid;
-      place-items: center;
       width: 32px;
       height: 32px;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      color: #f6d58e;
-      background: linear-gradient(135deg, rgba($gold, .28), rgba($gold, .06));
-      border: 1px solid rgba($gold, .27);
+      border-radius: 50%;
+      object-fit: contain;
       flex-shrink: 0;
     }
     .brand-name { font-family: 'Playfair Display', serif; color: #f8f5ef; font-size: 1.22rem; font-weight: 700; letter-spacing: .1px; flex: 1; white-space: nowrap; }

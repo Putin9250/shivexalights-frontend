@@ -9,6 +9,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { toggleWishlist } from "../../redux/wishlistReducer";
 import RandomProducts from "../../Components/RandomProducts/RandomProducts";
+import { API_UPLOAD_URL } from "../../config/api";
 
 const ProductImage = ({ src, fallback, skeletonClassName, alt, loading, onClick }) => {
   const [loaded, setLoaded] = useState(false);
@@ -95,7 +96,7 @@ const Product = () => {
   if (!product) return <p>Product not found.</p>;
 
   const isInWishlist = wishlist.some((item) => item._id === product._id);
-  const baseUrl = import.meta.env.VITE_API_UPLOAD_URL || "";
+  const baseUrl = API_UPLOAD_URL;
 
   const getImageUrl = (imgField) => {
     if (!imgField) return "";

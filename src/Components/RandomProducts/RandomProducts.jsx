@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
+import { API_UPLOAD_URL } from "../../config/api";
 import "./RandomProducts.scss";
 
 const fallbackImage =
@@ -10,7 +11,7 @@ const EMPTY_RECOMMENDATIONS = [];
 const RandomProducts = ({ count = 8, currentProductId, selectedProducts = EMPTY_RECOMMENDATIONS }) => {
   const { data, loading, error } = useFetch("/products");
   const [randomItems, setRandomItems] = useState([]);
-  const baseUrl = import.meta.env.VITE_API_UPLOAD_URL || "";
+  const baseUrl = API_UPLOAD_URL;
 
   const getImageUrl = (img) => {
     if (!img) return "";

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import axios from "axios";
+import { API_URL } from "../../config/api";
 import { resetCart } from "../../redux/cartReducer";
 import "./Checkout.scss";
 import { useClerk } from "@clerk/clerk-react";
@@ -82,7 +83,7 @@ const Checkout = () => {
 
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/orders`,
+        `${API_URL}/orders`,
         orderData,
       );
 
@@ -113,12 +114,12 @@ const Checkout = () => {
         quantity: item.quantity,
         size: item.size || null,
       }));
-      await axios.post(`${import.meta.env.VITE_API_URL}/orders/validate`, { products: lineItems });
+      await axios.post(`${API_URL}/orders/validate`, { products: lineItems });
 
       const amountInPaise = totalPrice * 100;
 
       const { data: order } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/orders/create-razorpay-order`,
+        `${API_URL}/orders/create-razorpay-order`,
         { amount: amountInPaise },
       );
 
@@ -162,7 +163,7 @@ const Checkout = () => {
 
           try {
             const res = await axios.post(
-              `${import.meta.env.VITE_API_URL}/orders`,
+              `${API_URL}/orders`,
               orderData,
             );
 

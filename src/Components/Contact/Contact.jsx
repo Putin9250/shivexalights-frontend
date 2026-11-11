@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API_URL } from "../../config/api";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -20,7 +21,7 @@ const Contact = () => {
     setLoading(true);
     setStatus({ type: "", message: "" });
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/subscribe`, { email });
+      const response = await axios.post(`${API_URL}/subscribe`, { email });
       setStatus({ type: "success", message: "Thanks for subscribing!" });
       setEmail("");
     } catch (err) {

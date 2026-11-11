@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { API_UPLOAD_URL } from "../../config/api";
 import "./Cards.scss";
 
 const Cards = ({ item }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imgError, setImgError] = useState(false);
-  const baseUrl = import.meta.env.VITE_API_UPLOAD_URL || "";
+  const baseUrl = API_UPLOAD_URL;
 
   const getImageUrl = (imgField) => {
     if (!imgField) return "";

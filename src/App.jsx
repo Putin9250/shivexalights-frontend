@@ -6,6 +6,7 @@ import ScrollToTop from "./Hooks/useScrollToTop";
 import FloatingActions from "./Components/FloatingActions/FloatingActions";
 import SEO from "./Components/SEO/SEO";
 import AdminPanel from "./Pages/AdminPanel/AdminPanel";
+import { API_URL } from "./config/api";
 import "./App.scss";
 
 // ── Lazy‑load all pages ──────────────────────────────────────────────────
@@ -40,7 +41,7 @@ const PageLoader = () => (
 
 // ── Backend warm-up ping to prevent Render cold-start delay ──────────────
 const warmUpBackend = () => {
-  const API = import.meta.env.VITE_API_URL;
+  const API = API_URL;
   if (!API) return;
   const cachePrefix = "shivexa_cache_";
   const endpoints = [

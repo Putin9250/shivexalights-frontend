@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser, SignInButton } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
+import { API_URL, API_UPLOAD_URL } from "../../config/api";
 import "./Order.scss";
 
 const Orders = () => {
@@ -10,7 +11,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const baseUrl = import.meta.env.VITE_API_UPLOAD_URL || "";
+  const baseUrl = API_UPLOAD_URL;
 
   const getImageUrl = (imgField) => {
     if (!imgField) return "";
@@ -25,7 +26,7 @@ const Orders = () => {
         setLoading(true);
 
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/orders/user/${user.id}`,
+          `${API_URL}/orders/user/${user.id}`,
         );
 
         console.log("Orders:", res.data);

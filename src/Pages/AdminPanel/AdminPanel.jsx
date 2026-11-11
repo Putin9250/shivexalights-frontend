@@ -2,9 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { downloadProductImportTemplate, exportRowsToExcel, readProductImportFile } from "../../utils/exportExcel";
+import BrandLogo from "../../../Images/shivexa-lighting-logo.png";
+import { API_URL } from "../../config/api";
 import "./AdminPanel.scss";
 
-const API = import.meta.env.VITE_API_URL;
+const API = API_URL;
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 const Icon = ({ name }) => {
@@ -465,7 +467,7 @@ const AdminPanel = () => {
       <div className="admin-login">
         <div className="login-card">
           <div className="login-brand">
-            <span className="login-logo">✦</span>
+            <img className="login-logo" src={BrandLogo} alt="Shivexa Lighting" />
             <h1>Shivexa Lighting Admin</h1>
             <p>Control Panel — Restricted Access</p>
           </div>
@@ -502,7 +504,7 @@ const AdminPanel = () => {
       {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="sidebar-header">
-          <span className="brand-mark">✦</span>
+          <img className="brand-mark" src={BrandLogo} alt="Shivexa Lighting" />
           {sidebarOpen && <span className="brand-name">Shivexa Lighting</span>}
           <button className="toggle-btn" onClick={() => setSidebarOpen(p => !p)}>
             {sidebarOpen ? "◀" : "▶"}
