@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import "./Blog.scss";
@@ -11,6 +11,70 @@ const formatBrandName = (value) => String(value || "Shivexa Lighting Editorial")
 const BlogDetail = () => {
   const { id } = useParams();
   const { data: blog, loading, error } = useFetch(`/blogs/${id}`);
+
+useEffect(() => {
+  if (!blog?.title) return;
+
+  const seoTitle = blog.seoTitle?.trim() || blog.title;
+
+  const fallbackDescription =
+    blog.excerpt ||
+    blog.content?.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim() ||
+    blog.title;
+
+  const seoDescription = (
+    blog.seoDescription?.trim() || fallbackDescription
+  ).slice(0, 160);
+
+  document.title = seoTitle;
+
+  const updateMeta = (selector, attribute, key, value) => {
+    let element = document.head.querySelector(selector);
+
+    if (!element) {
+      element = document.createElement("meta");
+      element.setAttribute(attribute, key);
+      document.head.appendChild(element);
+    }
+
+    element.setAttribute("content", value);
+  };
+
+  updateMeta(
+    'meta[name="description"]',
+    "name",
+    "description",
+    seoDescription
+  );
+
+  updateMeta(
+    'meta[property="og:title"]',
+    "property",
+    "og:title",
+    seoTitle
+  );
+
+  updateMeta(
+    'meta[property="og:description"]',
+    "property",
+    "og:description",
+    seoDescription
+  );
+
+  updateMeta(
+    'meta[name="twitter:title"]',
+    "name",
+    "twitter:title",
+    seoTitle
+  );
+
+  updateMeta(
+    'meta[name="twitter:description"]',
+    "name",
+    "twitter:description",
+    seoDescription
+  );
+}, [blog]);
 
   if (loading) return <div className="blog-loading">Loading article...</div>;
 
