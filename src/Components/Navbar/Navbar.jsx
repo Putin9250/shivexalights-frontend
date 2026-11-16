@@ -144,7 +144,7 @@ useEffect(() => {
             </div>
             <Link to="/order" onClick={closeMobileMenu}>Orders</Link>
             <Link to="/collection" onClick={closeMobileMenu}>Collection</Link>
-            <Link to="/about" onClick={closeMobileMenu}>About</Link>
+            <Link to="/blogs" onClick={closeMobileMenu}>Blogs</Link>
             <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
           </nav>
 
@@ -208,10 +208,13 @@ useEffect(() => {
           <div className="mobile-section">
             <h4>Navigate</h4>
             <Link to="/" onClick={closeMobileMenu}>Home</Link>
-            <Link to="/order" onClick={closeMobileMenu}>Orders</Link>
-            <Link to="/about" onClick={closeMobileMenu}>About</Link>
-            <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
             <Link to="/collection" onClick={closeMobileMenu}>Collection</Link>
+            
+            <Link to="/blogs" onClick={closeMobileMenu}>Blogs</Link>
+
+            <Link to="/about" onClick={closeMobileMenu}>About</Link>
+
+            <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
           </div>
           <div className="mobile-section">
             <h4>Account</h4>
