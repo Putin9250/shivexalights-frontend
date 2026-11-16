@@ -50,11 +50,13 @@ const Blog = () => {
           {displayBlogs.map((article) => (
             <article key={article._id} className="blog-card">
               <div className="card-image">
+                <Link to={`/blog/${article._id}`} className="read-more">
                 <img
                   src={article.coverImg || "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=800"}
                   alt={article.title}
                   loading="lazy"
                 />
+                </Link>
                 {article.tags?.[0] && <span className="card-tag">{article.tags[0]}</span>}
               </div>
               <div className="card-content">
@@ -63,7 +65,8 @@ const Blog = () => {
                   <span>•</span>
                   <span>{formatBrandName(article.author)}</span>
                 </div>
-                <h2>{article.title}</h2>
+                <Link to={`/blog/${article._id}`} className="read-more">
+                <h2>{article.title}</h2></Link>
                 <p>{article.excerpt}</p>
                 <Link to={`/blog/${article._id}`} className="read-more">
                   Read Article →
