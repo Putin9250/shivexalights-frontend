@@ -10,7 +10,7 @@ const formatBrandName = (value) => String(value || "Shivexa Lighting Editorial")
 
 const BlogDetail = () => {
   const { id } = useParams();
-  const { data: blog, loading, error } = useFetch(`/blogs/${id}`);
+const { data: blog, loading, error } = useFetch(`/blogs/${id}`);
 
 useEffect(() => {
   if (!blog?.title) return;
