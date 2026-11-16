@@ -144,7 +144,7 @@ useEffect(() => {
             </div>
             <Link to="/order" onClick={closeMobileMenu}>Orders</Link>
             <Link to="/collection" onClick={closeMobileMenu}>Collection</Link>
-            <Link to="/blogs" onClick={closeMobileMenu}>Blogs</Link>
+            <Link to="/blogs" onClick={closeMobileMenu}>Blogs </Link>
             <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
           </nav>
 

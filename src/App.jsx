@@ -6,6 +6,7 @@ import ScrollToTop from "./Hooks/useScrollToTop";
 import FloatingActions from "./Components/FloatingActions/FloatingActions";
 import SEO from "./Components/SEO/SEO";
 import AdminPanel from "./Pages/AdminPanel/AdminPanel";
+import NotFound from "./Components/NotFound/NotFound";
 import { API_URL } from "./config/api";
 import "./App.scss";
 
@@ -113,6 +114,7 @@ const router = createBrowserRouter([
       { path: "order", element: <Orders /> },
       { path: "blogs", element: <Blog /> },
       { path: "blog/:id", element: <BlogDetail /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
   {
