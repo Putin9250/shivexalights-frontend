@@ -8,7 +8,9 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import PaymentMethodPhoto from "../../../Images/payment.png"
-import BrandLogo from "../../../Images/shivexa-lighting-logo.png";
+// import BrandLogo from "../../../Images/shivexa-lighting-logo.png";
+import BrandLogo from "../../AssetsPhotos/logo2.svg";
+
 import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -33,10 +35,10 @@ const Footer = () => {
           <ul className="footer-links">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/collection">Collection</Link></li>
-            <li><Link to="/blogs">Lighting journal</Link></li>
-            <li><Link to="/about">About Shivexa Lighting</Link></li>
-            <li><Link to="/contact">Contact us</Link></li>
             <li><Link to="/order">My orders</Link></li>
+            <li><Link to="/blogs">Blogs</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
 
@@ -79,12 +81,12 @@ const Footer = () => {
             </div>
           </div>
           <div className="payment-methods">
-            <img src={ PaymentMethodPhoto} alt="Accepted payment methods" loading="lazy"/>
+            <img src={BrandLogo} alt="Accepted payment methods" loading="lazy"/>
           </div>
         </div>
       </div>
 
-      <div className="footer-bottom">
+      {/* <div className="footer-bottom">
         <div className="footer-bottom-content">
           <div className="copyright-section">
             <img className="footer-logo-image" src={BrandLogo} alt="Shivexa Lighting" />
@@ -96,7 +98,7 @@ const Footer = () => {
 
           
         </div>
-      </div>
+      </div> */}
     </footer>
   );
 };

@@ -13,7 +13,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import Cart from "../Cart/Cart";
 import Wishlist from "../Wishlist/Wishlist";
 import Search from "../Search/Search";
-import BrandLogo from "../../../Images/shivexa-lighting-logo.png";
+// import BrandLogo from "../../../Images/shivexa-lighting-logo.png";
+import BrandLogo from "../../AssetsPhotos/logo2.svg";
+
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
@@ -144,7 +146,7 @@ useEffect(() => {
             </div>
             <Link to="/order" onClick={closeMobileMenu}>Orders</Link>
             <Link to="/collection" onClick={closeMobileMenu}>Collection</Link>
-            <Link to="/blogs" onClick={closeMobileMenu}>Blogs </Link>
+            <Link to="/blogs" onClick={closeMobileMenu}>Blogs</Link>
             <Link to="/contact" onClick={closeMobileMenu}>Contact</Link>
           </nav>
 

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 540 140"
+     role="img"
+     aria-labelledby="logo-title">
+  
+  <title id="logo-title">ShivExa Lighting</title>
+
+  <defs>
+    <filter id="badge-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <style>
+    .wordmark {
+      font-family: 'Outfit', 'Avenir Next', Arial, sans-serif;
+      font-size: 105px;
+      font-weight: 800;
+      letter-spacing: -5.5px; 
+    }
+    .badge-text {
+      font-family: 'Outfit', 'Avenir Next', Arial, sans-serif;
+      font-size: 20px;        /* Increased from 16px */
+      font-weight: 800;       /* Made bolder to match logo */
+      letter-spacing: 1.5px;
+    }
+  </style>
+
+  <text class="wordmark" x="10" y="112">
+    <tspan fill="#B87333">Shiv</tspan><tspan fill="#1E293B">Exa</tspan>
+  </text>
+
+  <circle cx="442" cy="104" r="9" fill="#B87333"/>
+
+  <!-- Badge modified to be larger and hold bigger text -->
+  <g transform="translate(360, 8)" filter="url(#badge-shadow)">
+    <rect width="160" height="40" rx="20" fill="#B87333"/>
+    <text class="badge-text" x="80" y="27" text-anchor="middle" fill="#FFFFFF">LIGHTING</text>
+  </g>
+</svg>
