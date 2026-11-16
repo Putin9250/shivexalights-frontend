@@ -105,6 +105,7 @@ const AdminPanel = () => {
   // Blog form
   const emptyBlog = {
     title: "",
+    slug: "",
     excerpt: "",
     content: "",
     coverImg: "",
@@ -1908,6 +1909,20 @@ const AdminPanel = () => {
         setBlogForm({ ...blogForm, seoDescription: e.target.value })
       }
     />
+    <label>Blog Slug *</label>
+  <input
+    type="text"
+    className="form-input span-2"
+    value={blogForm.slug}
+    onChange={(e) =>
+      setBlogForm((prev) => ({
+        ...prev,
+        slug: e.target.value.trim().toLowerCase().replace(/\s+/g, "-"),
+      }))
+    }
+    placeholder="modern-lighting-design-trends"
+    required
+  />
   </div>
 </div>
 
